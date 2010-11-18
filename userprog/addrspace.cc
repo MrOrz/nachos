@@ -55,24 +55,17 @@ SwapHeader (NoffHeader *noffH)
 
 AddrSpace::AddrSpace()
 {
-
-    pageTable = new TranslationEntry[NumPhysPages];
+/*    pageTable = new TranslationEntry[NumPhysPages];
     for (unsigned int i = 0; i < NumPhysPages; i++) {
 	pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
-    int j=0;	
-    while(usedPhyPage[j++]!=FALSE);
-    usedPhyPage[j-1]=TRUE;
-    pageTable[i].physicalPage = j-1;
+	pageTable[i].physicalPage = i;
 //	pageTable[i].physicalPage = 0;
 	pageTable[i].valid = TRUE;
 //	pageTable[i].valid = FALSE;
 	pageTable[i].use = FALSE;
 	pageTable[i].dirty = FALSE;
 	pageTable[i].readOnly = FALSE;  
-    }
-
-    size = numPages * PageSize;
-    ASSERT(numPages <= NumPhysPages);
+    }*/
     // zero out the entire address space
 //    bzero(kernel->machine->mainMemory, MemorySize);
 }
@@ -123,6 +116,23 @@ AddrSpace::Load(char *fileName)
 						// to leave room for the stack
     numPages = divRoundUp(size, PageSize);
 //	cout << "number of pages of " << fileName<< " is "<<numPages<<endl;
+
+    pageTable = new TranslationEntry[numPages];
+    for (unsigned int i = 0,j=0; i < numPages; i++) {
+	pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
+	
+    while(usedPhyPage[j++]!=FALSE);
+    usedPhyPage[j-1]=TRUE;
+    pageTable[i].physicalPage = j-1;
+//	pageTable[i].physicalPage = 0;
+	pageTable[i].valid = TRUE;
+//	pageTable[i].valid = FALSE;
+	pageTable[i].use = FALSE;
+	pageTable[i].dirty = FALSE;
+	pageTable[i].readOnly = FALSE;  
+    }
+
+
     size = numPages * PageSize;
 
     ASSERT(numPages <= NumPhysPages);		// check we're not trying
