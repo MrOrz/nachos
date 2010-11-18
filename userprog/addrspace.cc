@@ -70,7 +70,9 @@ AddrSpace::AddrSpace()
 	pageTable[i].dirty = FALSE;
 	pageTable[i].readOnly = FALSE;  
     }
-    
+
+    size = numPages * PageSize;
+    ASSERT(numPages <= NumPhysPages);
     // zero out the entire address space
 //    bzero(kernel->machine->mainMemory, MemorySize);
 }
