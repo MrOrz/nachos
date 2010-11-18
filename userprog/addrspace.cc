@@ -119,17 +119,17 @@ AddrSpace::Load(char *fileName)
 
     pageTable = new TranslationEntry[numPages];
     for (unsigned int i = 0,j=0; i < numPages; i++) {
-	pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
+	    pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
 	
-    while(usedPhyPage[j++]!=FALSE);
-    usedPhyPage[j-1]=TRUE;
-    pageTable[i].physicalPage = j-1;
-//	pageTable[i].physicalPage = 0;
-	pageTable[i].valid = TRUE;
-//	pageTable[i].valid = FALSE;
-	pageTable[i].use = FALSE;
-	pageTable[i].dirty = FALSE;
-	pageTable[i].readOnly = FALSE;  
+        while(usedPhyPage[j]!=FALSE) ++j;
+        usedPhyPage[j]=TRUE;
+        pageTable[i].physicalPage = j;
+    //	pageTable[i].physicalPage = 0;
+	    pageTable[i].valid = TRUE;
+    //	pageTable[i].valid = FALSE;
+	    pageTable[i].use = FALSE;
+	    pageTable[i].dirty = FALSE;
+	    pageTable[i].readOnly = FALSE;  
     }
 
 
@@ -146,10 +146,13 @@ AddrSpace::Load(char *fileName)
 	if (noffH.code.size > 0) {
 //        DEBUG(dbgAddr, "Initializing code segment.");
 //	DEBUG(dbgAddr, noffH.code.virtualAddr << ", " << noffH.code.size);
+        int virtualPageN = noffH.code.virtualAddr/PageSize;     
+        int virtualPageLocation = noffH.code.virtualAddr% PageSize;
+        int physicalPageN = pageTable[virtualPageN].physicalPage;
+        int memoryLocation = physicalPageN * PageSize + virtualPageLocation;
+                                            //virtualPageLocation=physicalPageLocation
         executable->ReadAt(&(kernel->machine->
-        mainMemory[pageTable[noffH.code.virtualAddr/PageSize].
-        physicalPage*PageSize+(noffH.code.virtualAddr%
-        PageSize)]),noffH.code.size,noffH.code.inFileAddr);
+        mainMemory[memoryLocation]),noffH.code.size,noffH.code.inFileAddr);
 /*        	executable->ReadAt(
 		&(kernel->machine->mainMemory[noffH.code.virtualAddr]), 
 			noffH.code.size, noffH.code.inFileAddr);*/
@@ -157,11 +160,13 @@ AddrSpace::Load(char *fileName)
 	if (noffH.initData.size > 0) {
 //        DEBUG(dbgAddr, "Initializing data segment.");
 //	DEBUG(dbgAddr, noffH.initData.virtualAddr << ", " << noffH.initData.size);
+        int virtualPageN = noffH.initData.virtualAddr/PageSize;     
+        int virtualPageLocation = noffH.initData.virtualAddr% PageSize;
+        int physicalPageN = pageTable[virtualPageN].physicalPage;
+        int memoryLocation = physicalPageN * PageSize + virtualPageLocation;
+                                            //virtualPageLocation=physicalPageLocation
         executable->ReadAt(&(kernel->machine->
-        mainMemory[pageTable[noffH.initData.virtualAddr/PageSize].
-        physicalPage*PageSize+(noffH.code.virtualAddr%
-        PageSize)]),noffH.initData.size,noffH.initData.inFileAddr);
-
+        mainMemory[memoryLocation]),noffH.initData.size,noffH.initData.inFileAddr);
 
 /*        executable->ReadAt(
 		&(kernel->machine->mainMemory[noffH.initData.virtualAddr]),
