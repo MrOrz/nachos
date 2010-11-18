@@ -60,7 +60,7 @@ AddrSpace::AddrSpace()
     for (unsigned int i = 0; i < NumPhysPages; i++) {
 	pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
     int j=0;	
-    while(usedPhyPage[j++]==FALSE);
+    while(usedPhyPage[j++]!=FALSE);
     usedPhyPage[j-1]=TRUE;
     pageTable[i].physicalPage = j-1;
 //	pageTable[i].physicalPage = 0;
