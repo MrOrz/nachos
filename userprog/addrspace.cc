@@ -21,7 +21,7 @@
 #include "machine.h"
 #include "noff.h"
 
-bool AddrSpace::usedPhyPage[NumPhysPages];
+bool AddrSpace::usedPhyPage[NumPhysPages]={0};
 
 //----------------------------------------------------------------------
 // SwapHeader
