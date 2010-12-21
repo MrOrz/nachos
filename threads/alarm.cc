@@ -75,13 +75,11 @@ Alarm::CallBack()
     }
 }
 
+
 void
-Alarm::SleepThread(Thread* t, int x){
-  DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x " ticks...");
-  _sleeping_list.append( SleepingEntry(t, x) );
+Alarm::WaitUntil(int x){
+  Thread* t = kernel->currentThread;
+  DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x << " ticks...");
+  _sleeping_list.push_back( SleepingEntry(t, x) );
 }
 
-void 
-Alarm::WaitUntil(int x){
-    SleepThread(currentThread,x);
-}

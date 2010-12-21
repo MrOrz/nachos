@@ -21,14 +21,16 @@
 #include "utility.h"
 #include "callback.h"
 #include "timer.h"
+#include "thread.h"
 #include <list>
 
 // DONE: sleeping list entry
 class SleepingEntry {
+  friend class Alarm;
   public:
-    SleepingEntry(Thread* t, int x):_thread(t), _tick_left(x){}
+    SleepingEntry(Thread * t, int x):_thread(t), _tick_left(x){}
     bool operator == (const SleepingEntry& e){
-      return (e._thread == _thread)
+      return (e._thread == _thread);
     }
 
   private:
@@ -44,7 +46,6 @@ class Alarm : public CallBackObj {
     ~Alarm() { delete timer; }
 
     void WaitUntil(int x);	// suspend execution until time > now + x
-    void SleepThread(Thread*, int);
 
   private:
     Timer *timer;		// the hardware timer device
