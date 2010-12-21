@@ -29,7 +29,7 @@
 //	Initially, no ready threads.
 //----------------------------------------------------------------------
 
-//DONE
+//TODO
 static int
 SJFCompare(Thread* a,Thread* b){ 
     if(a->TimeNeed() - b->TimeNeed() > 0) return 1;
