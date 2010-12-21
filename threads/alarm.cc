@@ -11,7 +11,7 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
-//#include "interrupt.h" // setLevel() DONE
+#include "bedroom.h" //DONE
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -53,40 +53,12 @@ Alarm::CallBack()
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
 
-    /* DONE: checking _sleeping_list for threads to wake */
-
-    /* within the interrupt handler, interrupt won't happen
-     (guarded by 'inHandler' within interrupt.h .) Don't need to
-     turn off interrupt here.*/
-
-    // TODO: make use of interrupts instead.
-    // checking & removing _tick_left everytime is silly :P
-    
-    for(std::list<SleepingEntry>::iterator it = _sleeping_list.begin();
-        it != _sleeping_list.end();){
-
-      --(it->_tick_left); // take one tick away
-
-      if(it->_tick_left == -1){ // should wake up this thread
-        DEBUG(dbgThread, "Thread " << (int)(it->_thread) << " is awakening.");        
-        cout <<"Thread " << (int)(it->_thread) << " is awakening." <<endl;;
-        kernel->scheduler->ReadyToRun(it->_thread);
-
-        it = _sleeping_list.erase(it);       // remove from _sleeping_list
-        status = SystemMode;
-     
-      }
-      else ++it;
-
-
-    }	
-    
-    /* ---- */
-    if (status == IdleMode && _sleeping_list.empty()) {	// is it time to quit?
+    if (status == IdleMode) {	// is it time to quit?
         if (!interrupt->AnyFutureInterrupts()) {
 	    timer->Disable();	// turn off the timer
 	}
     } else {			// there's someone to preempt
+        interrupt->YieldOnReturn();
         //DONE
         if(kernel->scheduler->getSchedulerType() == RR) interrupt->YieldOnReturn();
         else if(kernel->scheduler->getSchedulerType() == SJF){
@@ -111,12 +83,14 @@ Alarm::WaitUntil(int x){
 
   // manipulating interrupts, thus turn off interrupt.
   IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
-
   Thread* t = kernel->currentThread;
-  DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x << " ticks...");
 
-  _sleeping_list.push_back( SleepingEntry(t, x) );
-  t->Sleep(false); // not finishing, thus pass in "false"
+  DEBUG(dbgSleep, "** Thread " << t << " will sleep for " << x << " ticks...");
+
+  kernel->interrupt->Schedule(new Bed(t), x, TimerInt); // set alarm clock
+      // the alarm clock will be fired by timer interrupt, x ticks later.
+
+  t->Sleep(false); // good night, Mr.t.
 
   (void) kernel->interrupt->SetLevel(oldLevel);
   // set the original interrupt level back.

@@ -1,19 +1,19 @@
 # This is part of a GNU Makefile, included by the Makefiles in
-# each of the subdirectories.  
+# each of the subdirectories.
 #
 # This file includes all of the baseline code provided by Nachos.
-# Whenever you add a .h or .cc file, put it in the appropriate 
+# Whenever you add a .h or .cc file, put it in the appropriate
 # _H,_C, or _O list.
 #
 # The dependency graph between assignments is:
 #   1. THREADS before everything else
 #   2. USERPROG must come before VM
-#   3. USERPROG can come before or after FILESYS, but if USERPROG comes 
+#   3. USERPROG can come before or after FILESYS, but if USERPROG comes
 #	before (as in this distribution), then it must define FILESYS_STUB
 #
 #   Other than that, you have complete flexibility.
 #
-# Also whenever you change the include structure of your program, you should 
+# Also whenever you change the include structure of your program, you should
 # do a gmake depend in the subdirectory -- this will modify the Makefile
 # to keep track of the new dependency.
 
@@ -22,7 +22,7 @@
 # you need to call some inline functions from the debugger.
 
 # Copyright (c) 1992-1996 The Regents of the University of California.
-# All rights reserved.  See copyright.h for copyright notice and limitation 
+# All rights reserved.  See copyright.h for copyright notice and limitation
 # of liability and disclaimer of warranty provisions.
 
 CFLAGS = -g -Wall -fwritable-strings $(INCPATH) $(DEFINES) $(HOST) -DCHANGED
@@ -49,6 +49,7 @@ THREAD_H = ../lib/bitmap.h\
 	../machine/interrupt.h\
 	../machine/stats.h\
 	../machine/timer.h\
+	../threads/bedroom.h\
 	../threads/alarm.h\
 	../threads/kernel.h\
 	../threads/main.h\
@@ -70,6 +71,7 @@ THREAD_C = ../lib/bitmap.cc\
 	../machine/stats.cc\
 	../machine/timer.cc\
 	../threads/alarm.cc\
+	../threads/bedroom.cpp\
 	../threads/kernel.cc\
 	../threads/main.cc\
 	../threads/scheduler.cc\
@@ -83,7 +85,7 @@ THREAD_S = ../threads/switch.s
 
 THREAD_O = bitmap.o debug.o libtest.o sysdep.o interrupt.o stats.o timer.o \
 	alarm.o kernel.o main.o scheduler.o synch.o thread.o elevator.o \
-	elevatortest.o
+	elevatortest.o bedroom.o
 
 USERPROG_H = ../userprog/addrspace.h\
 	../userprog/userkernel.h\
@@ -155,7 +157,8 @@ depend: $(CFILES) $(HFILES)
 	echo 'w' >>eddep
 	echo 'q' >>eddep
 	ed - Makefile < eddep
-	rm eddep makedep 
+	rm eddep makedep
 	echo '# DEPENDENCIES MUST END AT END OF FILE' >> Makefile
 	echo '# IF YOU PUT STUFF HERE IT WILL GO AWAY' >> Makefile
 	echo '# see make depend above' >> Makefile
+
