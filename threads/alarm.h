@@ -21,8 +21,8 @@
 #include "utility.h"
 #include "callback.h"
 #include "timer.h"
-#include "thread.h"
-#include <list>
+#include "thread.h"  // SleepingEntry Thread* DONE
+#include <list>      // _sleeping_list        DONE
 
 // DONE: sleeping list entry
 class SleepingEntry {

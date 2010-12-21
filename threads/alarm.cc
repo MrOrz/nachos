@@ -11,6 +11,7 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
+//#include "interrupt.h" // setLevel() DONE
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -53,7 +54,14 @@ Alarm::CallBack()
     MachineStatus status = interrupt->getStatus();
 
     /* DONE: checking _sleeping_list for threads to wake */
-    // TODO: should this be atomic? ( should I turn off interrupt?)
+
+    /* within the interrupt handler, interrupt won't happen
+     (guarded by 'inHandler' within interrupt.h .) Don't need to
+     turn off interrupt here.*/
+
+    // TODO: make use of interrupts instead.
+    // checking & removing _tick_left everytime is silly :P
+
     for(std::list<SleepingEntry>::iterator it = _sleeping_list.begin();
         it != _sleeping_list.end(); ++it ){
       --(it->_tick_left); // take one tick away
@@ -73,22 +81,30 @@ Alarm::CallBack()
     } else {			// there's someone to preempt
         //DONE
         if(kernel->scheduler->getSchedulerType() == RR) interrupt->YieldOnReturn();
-        else if(kernel->scheduler->getSchedulerType() == SJF){ 
+        else if(kernel->scheduler->getSchedulerType() == SJF){
             int worktime = kernel->stats->userTicks - kernel->currentThread->getStartTime();
             kernel->currentThread->setBurstTime(worktime);
-            
+
         }
 
     }
-    
+
 
 }
 
 
 void
 Alarm::WaitUntil(int x){
+  // manipulating interrupts, thus turn off interrupt.
+  IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
+
   Thread* t = kernel->currentThread;
   DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x << " ticks...");
+
   _sleeping_list.push_back( SleepingEntry(t, x) );
+  t->Sleep(false); // not finishing, thus pass in "false"
+
+  (void) kernel->interrupt->SetLevel(oldLevel);
+  // set the original interrupt level back.
 }
 
