@@ -5,7 +5,7 @@
 //	Not completely implemented.
 //
 // Copyright (c) 1992-1996 The Regents of the University of California.
-// All rights reserved.  See copyright.h for copyright notice and limitation 
+// All rights reserved.  See copyright.h for copyright notice and limitation
 // of liability and disclaimer of warranty provisions.
 
 #include "copyright.h"
@@ -16,7 +16,7 @@
 // Alarm::Alarm
 //      Initialize a software alarm clock.  Start up a timer device
 //
-//      "doRandom" -- if true, arrange for the hardware interrupts to 
+//      "doRandom" -- if true, arrange for the hardware interrupts to
 //		occur at random, instead of fixed, intervals.
 //----------------------------------------------------------------------
 
@@ -35,23 +35,36 @@ Alarm::Alarm(bool doRandom)
 //	Note that instead of calling Yield() directly (which would
 //	suspend the interrupt handler, not the interrupted thread
 //	which is what we wanted to context switch), we set a flag
-//	so that once the interrupt handler is done, it will appear as 
-//	if the interrupted thread called Yield at the point it is 
+//	so that once the interrupt handler is done, it will appear as
+//	if the interrupted thread called Yield at the point it is
 //	was interrupted.
 //
-//	For now, just provide time-slicing.  Only need to time slice 
+//	For now, just provide time-slicing.  Only need to time slice
 //      if we're currently running something (in other words, not idle).
 //	Also, to keep from looping forever, we check if there's
 //	nothing on the ready list, and there are no other pending
 //	interrupts.  In this case, we can safely halt.
 //----------------------------------------------------------------------
 
-void 
-Alarm::CallBack() 
+void
+Alarm::CallBack()
 {
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
-    
+
+    /* DONE: checking _sleeping_list for threads to wake */
+    // TODO: should this be atomic? ( should I turn off interrupt?)
+    for(std::list<SleepingEntry>::iterator it = _sleeping_list.begin();
+        it != _sleeping_list.end(); ++it ){
+      --(it->_tick_left); // take one tick away
+
+      if(it->_tick_left == 0){ // should wake up this thread
+        it->_thread->setStatus(READY);  // set thread status
+        _sleeping_list.erase(it);       // remove from _sleeping_list
+      }
+    }
+    /* ---- */
+
     if (status == IdleMode) {	// is it time to quit?
         if (!interrupt->AnyFutureInterrupts()) {
 	    timer->Disable();	// turn off the timer
@@ -59,5 +72,10 @@ Alarm::CallBack()
     } else {			// there's someone to preempt
 	interrupt->YieldOnReturn();
     }
+}
+
+void
+Alarm::SleepThread(Thread* t, int x){
+  _sleeping_list.append( SleepingEntry(t, x) );
 }
 
