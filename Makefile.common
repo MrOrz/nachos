@@ -49,6 +49,7 @@ THREAD_H = ../lib/bitmap.h\
 	../machine/interrupt.h\
 	../machine/stats.h\
 	../machine/timer.h\
+	../threads/bedroom.h\
 	../threads/alarm.h\
 	../threads/kernel.h\
 	../threads/main.h\
@@ -70,6 +71,7 @@ THREAD_C = ../lib/bitmap.cc\
 	../machine/stats.cc\
 	../machine/timer.cc\
 	../threads/alarm.cc\
+	../threads/bedroom.cpp\
 	../threads/kernel.cc\
 	../threads/main.cc\
 	../threads/scheduler.cc\
@@ -83,13 +85,12 @@ THREAD_S = ../threads/switch.s
 
 THREAD_O = bitmap.o debug.o libtest.o sysdep.o interrupt.o stats.o timer.o \
 	alarm.o kernel.o main.o scheduler.o synch.o thread.o elevator.o \
-	elevatortest.o
+	elevatortest.o bedroom.o
 
 USERPROG_H = ../userprog/addrspace.h\
 	../userprog/userkernel.h\
 	../userprog/syscall.h\
 	../userprog/synchconsole.h\
-	../userprog/bedroom.h\
         ../filesys/filesys.h\
         ../filesys/openfile.h\
         ../machine/console.h\
@@ -103,7 +104,6 @@ USERPROG_C = ../userprog/addrspace.cc\
         ../userprog/exception.cc\
 	../userprog/synchconsole.cc\
 	../userprog/userkernel.cc\
-	../userprog/bedroom.cpp\
         ../machine/console.cc\
         ../machine/machine.cc\
         ../machine/mipssim.cc\
