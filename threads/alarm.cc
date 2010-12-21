@@ -11,6 +11,7 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
+//#include "interrupt.h" // setLevel() DONE
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -53,20 +54,33 @@ Alarm::CallBack()
     MachineStatus status = interrupt->getStatus();
 
     /* DONE: checking _sleeping_list for threads to wake */
-    // TODO: should this be atomic? ( should I turn off interrupt?)
+
+    /* within the interrupt handler, interrupt won't happen
+     (guarded by 'inHandler' within interrupt.h .) Don't need to
+     turn off interrupt here.*/
+
+    // TODO: make use of interrupts instead.
+    // checking & removing _tick_left everytime is silly :P
+    
     for(std::list<SleepingEntry>::iterator it = _sleeping_list.begin();
-        it != _sleeping_list.end(); ++it ){
+        it != _sleeping_list.end();++it){
+
       --(it->_tick_left); // take one tick away
 
       if(it->_tick_left == -1){ // should wake up this thread
-        DEBUG(dbgThread, "Thread " << (int)(it->_thread) << " is awakening.");
-        it->_thread->setStatus(READY);  // set thread status
-        _sleeping_list.erase(it);       // remove from _sleeping_list
-        status = SystemMode;
-      }
-    }
-    /* ---- */
+        DEBUG(dbgThread, "Thread " << (int)(it->_thread) << " is awakening.");        
+        cout <<"Thread " << (int)(it->_thread) << " is awakening." <<endl;;
 
+        kernel->scheduler->ReadyToRun(it->_thread);
+        it = _sleeping_list.erase(it);       // remove from _sleeping_list
+        status = SystemMode;
+        if(it == _sleeping_list.end())break;
+      }
+
+
+    }	
+    
+    /* ---- */
     if (status == IdleMode && _sleeping_list.empty()) {	// is it time to quit?
         if (!interrupt->AnyFutureInterrupts()) {
 	    timer->Disable();	// turn off the timer
@@ -74,25 +88,32 @@ Alarm::CallBack()
     } else {			// there's someone to preempt
         //DONE
         if(kernel->scheduler->getSchedulerType() == RR) interrupt->YieldOnReturn();
-        else if(kernel->scheduler->getSchedulerType() == SJF){ 
+        else if(kernel->scheduler->getSchedulerType() == SJF){
             int worktime = kernel->stats->userTicks - kernel->currentThread->getStartTime();
             kernel->currentThread->setBurstTime(worktime);
-            
+
         }
 
     }
-    
+
 
 }
 
 
 void
 Alarm::WaitUntil(int x){
-    Thread* t = kernel->currentThread;
-    kernel->interrupt->SetLevel(IntOff);
-    DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x << " ticks...");
-    _sleeping_list.push_back( SleepingEntry(kernel->currentThread, x));
-    kernel->currentThread->Sleep(false);
-    kernel->interrupt->SetLevel(IntOn);
+
+  // manipulating interrupts, thus turn off interrupt.
+  IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
+
+  Thread* t = kernel->currentThread;
+  DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x << " ticks...");
+
+  _sleeping_list.push_back( SleepingEntry(t, x) );
+  t->Sleep(false); // not finishing, thus pass in "false"
+
+  (void) kernel->interrupt->SetLevel(oldLevel);
+  // set the original interrupt level back.
+
 }
 
