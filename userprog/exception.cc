@@ -82,7 +82,7 @@ ExceptionHandler(ExceptionType which)
         case SC_Sleep: /* DONE: implementation of Sleep() */
             val=kernel->machine->ReadRegister(4); // load the argument x
             kernel->alarm->WaitUntil(val);
-            break;
+            return;
 		default:
 		    cerr << "Unexpected system call " << type << "\n";
  		    break;

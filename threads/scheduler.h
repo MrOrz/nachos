@@ -39,6 +39,7 @@ class Scheduler {
 	void Print();			// Print contents of ready list
 
     SchedulerType getSchedulerType(){return schedulerType;}  //DONE
+    void setSchedulerType(SchedulerType type){schedulerType = type;}  //DONE
     // SelfTest for scheduler is implemented in class Thread
     
   private:

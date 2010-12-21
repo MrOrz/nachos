@@ -58,15 +58,16 @@ Alarm::CallBack()
         it != _sleeping_list.end(); ++it ){
       --(it->_tick_left); // take one tick away
 
-      if(it->_tick_left == 0){ // should wake up this thread
+      if(it->_tick_left == -1){ // should wake up this thread
         DEBUG(dbgThread, "Thread " << (int)(it->_thread) << " is awakening.");
         it->_thread->setStatus(READY);  // set thread status
         _sleeping_list.erase(it);       // remove from _sleeping_list
+        status = SystemMode;
       }
     }
     /* ---- */
 
-    if (status == IdleMode) {	// is it time to quit?
+    if (status == IdleMode && _sleeping_list.empty()) {	// is it time to quit?
         if (!interrupt->AnyFutureInterrupts()) {
 	    timer->Disable();	// turn off the timer
 	}
@@ -87,8 +88,11 @@ Alarm::CallBack()
 
 void
 Alarm::WaitUntil(int x){
-  Thread* t = kernel->currentThread;
-  DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x << " ticks...");
-  _sleeping_list.push_back( SleepingEntry(t, x) );
+    Thread* t = kernel->currentThread;
+    kernel->interrupt->SetLevel(IntOff);
+    DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x << " ticks...");
+    _sleeping_list.push_back( SleepingEntry(kernel->currentThread, x));
+    kernel->currentThread->Sleep(false);
+    kernel->interrupt->SetLevel(IntOn);
 }
 

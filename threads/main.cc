@@ -77,7 +77,7 @@ main(int argc, char **argv)
 
     kernel = new KernelType(argc, argv);
     kernel->Initialize();
-    
+    kernel->scheduler->setSchedulerType(RR);
     CallOnUserAbort(Cleanup);		// if user hits ctl-C
 
     kernel->SelfTest();
