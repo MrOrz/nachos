@@ -38,11 +38,17 @@ SJFCompare(Thread* a,Thread* b){
     else return 0;
 }
 
+static int
+RRCompare(Thread* a,Thread* b){ 
+    return 0;
+}
+
+
 Scheduler::Scheduler()
 {
 //	schedulerType = type;
 //DONE
-	if(schedulerType == RR)readyList = new SortedList<Thread *>(0);
+	if(schedulerType == RR)readyList = new SortedList<Thread *>(RRCompare);
     else if(schedulerType == SJF)readyList = new SortedList<Thread *>(SJFCompare);
 	toBeDestroyed = NULL;
 }

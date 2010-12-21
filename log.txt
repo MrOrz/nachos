@@ -1,0 +1,165 @@
+commit dd970301955e01ccb5e4fa05ebd0ae56f194c69a
+Merge: 64c67b8 cebde28
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 21:55:48 2010 +0800
+
+    1pass 2crack
+
+commit 64c67b87a97f2a4a3834a8e1e9c3d9e4df2975d0
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 21:47:03 2010 +0800
+
+    test
+
+commit 0930a97f8dbc5d7228464284ceea41eda230531f
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 21:45:32 2010 +0800
+
+    test
+
+commit e16c134bd3faefda5115f56a822770a2713c8e5f
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 21:26:26 2010 +0800
+
+    1 pass 2 crack
+
+commit 9ec7c8865061ebae04dd67cc3674d283e838b977
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 19:39:32 2010 +0800
+
+    tmp
+
+commit cebde285ff9bda6664e133fcae1a420e64236786
+Author: johnsonliang7@gmail.com <nachos@nachos-VirtualBox.(none)>
+Date:   Tue Dec 21 19:35:29 2010 +0800
+
+    compiled binaries
+
+commit 0ebcba70883aa98f429a28635dc53ae2d7e51946
+Author: johnsonliang7@gmail.com <nachos@nachos-VirtualBox.(none)>
+Date:   Tue Dec 21 19:35:12 2010 +0800
+
+    Sleep done. testing
+
+commit 7c90d0f1dea33a401dd7750097e191d757c53e71
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 18:32:39 2010 +0800
+
+    modified "exception.cc"
+
+commit a9ab498799dbc5410af2644735f756dc1bec8705
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 18:25:34 2010 +0800
+
+    SJF compiled, not tested
+
+commit eaaf753e00c0e60e3176199ec1293de83e19d4ee
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 17:34:31 2010 +0800
+
+    add some comment
+
+commit 7e63110c81509a8b90c01a4432740cfed4c27c47
+Merge: 2dd88aa 484b29f
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 17:32:16 2010 +0800
+
+    Merge branch 'master' of github.com:MrOrz/nachos
+
+commit 2dd88aa6e3ec92c227a126a5991f8b051c43ed6e
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 17:30:30 2010 +0800
+
+    add sth about SJF
+
+commit 484b29f29d3587fcf93815f0406e8a64a8421062
+Author: johnsonliang7@gmail.com <nachos@nachos-VirtualBox.(none)>
+Date:   Tue Dec 21 17:28:24 2010 +0800
+
+    test program: sleep1.
+    CURRENT BUG: assertion ASSERTNOTREACHED() at exception.cc:95 fails when running test/sleep1.
+
+commit ed5cb55c7dfa422911d18c03ec49ae2c166fb658
+Author: johnsonliang7@gmail.com <nachos@nachos-VirtualBox.(none)>
+Date:   Tue Dec 21 14:00:51 2010 +0800
+
+    binary file updates
+
+commit 92ee096ba520ecb244fe6b7620454ead69a2a002
+Author: johnsonliang7@gmail.com <nachos@nachos-VirtualBox.(none)>
+Date:   Tue Dec 21 14:00:14 2010 +0800
+
+    compile ok.
+
+commit 8721a0573b3abb2392b1d577d31830c4e38680d3
+Author: donch1989 <donch1989@gmail.com>
+Date:   Tue Dec 21 13:41:54 2010 +0800
+
+    modified WaitUntil()
+
+commit dc82a42b38e3b2ff1ac1c157848d8dbeb7fa8acb
+Author: johnsonliang7@gmail.com <nachos@nachos-VirtualBox.(none)>
+Date:   Tue Dec 21 13:37:41 2010 +0800
+
+    debugging info added
+
+commit 010c0510b946c1ef81b4a46450f9ee6abe826a9d
+Author: johnsonliang7@gmail.com <nachos@nachos-VirtualBox.(none)>
+Date:   Tue Dec 21 12:41:23 2010 +0800
+
+    SleepingEntry & waking process done.
+
+commit 395277ac442655fe23fa31757e06fb0166594a13
+Merge: deefff3 a88f166
+Author: johnsonliang7@gmail.com <nachos@nachos-VirtualBox.(none)>
+Date:   Tue Dec 21 10:57:32 2010 +0800
+
+    Merge branch 'master' of github.com:MrOrz/nachos
+
+commit deefff372a561ef91207665463cf87e494858dc2
+Author: johnsonliang7@gmail.com <nachos@nachos-VirtualBox.(none)>
+Date:   Tue Dec 21 10:56:35 2010 +0800
+
+    proj2 stub added
+
+commit a88f166d0b31f90ecf2455a85ff6bdb99d95f4fa
+Author: donch1989 <donch1989@gmail.com>
+Date:   Thu Nov 18 18:58:45 2010 +0800
+
+    done again 2 : modify static bool initialize
+
+commit 2b63212a3c6a2d66861e3ec4bc7f4c551196b56d
+Author: donch1989 <donch1989@gmail.com>
+Date:   Thu Nov 18 17:05:20 2010 +0800
+
+    Done again. Modify the code about loading into main memory. To be easy read.
+
+commit 492d8107a7658f35853605cb8554a8a49e8bb1cf
+Author: donch1989 <donch1989@gmail.com>
+Date:   Thu Nov 18 15:04:55 2010 +0800
+
+    done
+
+commit dfa2f1e50516f52099c6f4e0261db4f67ffa1cf5
+Author: donch1989 <donch1989@gmail.com>
+Date:   Thu Nov 18 14:40:07 2010 +0800
+
+    another missed command
+
+commit 9ff50f512baadfc1fa848d1671e2f4dfc8ea2960
+Author: donch1989 <donch1989@gmail.com>
+Date:   Thu Nov 18 14:32:30 2010 +0800
+
+    Fix Bug1
+
+commit 701b1a745b4304a2b9b9face6e84214616d9a9e0
+Author: donch1989 <donch1989@gmail.com>
+Date:   Thu Nov 18 14:22:55 2010 +0800
+
+    compile succeed!
+
+commit 4b869a5c196ff621483b42167090e2602b684184
+Author: johnsonliang7@gmail.com <nachos@nachos-VirtualBox.(none)>
+Date:   Thu Nov 18 13:29:54 2010 +0800
+
+    init commit

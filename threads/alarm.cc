@@ -63,7 +63,7 @@ Alarm::CallBack()
     // checking & removing _tick_left everytime is silly :P
     
     for(std::list<SleepingEntry>::iterator it = _sleeping_list.begin();
-        it != _sleeping_list.end();++it){
+        it != _sleeping_list.end();){
 
       --(it->_tick_left); // take one tick away
 
@@ -76,6 +76,7 @@ Alarm::CallBack()
         status = SystemMode;
         if(it == _sleeping_list.end())break;
       }
+      else ++it;
 
 
     }	
