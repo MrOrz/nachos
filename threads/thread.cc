@@ -39,6 +39,7 @@ Thread::Thread(char* threadName)
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;
+    busrtTime = TimerTicks;
     for (int i = 0; i < MachineStateSize; i++) {
 	machineState[i] = NULL;		// not strictly necessary, since
 					// new thread ignores contents 

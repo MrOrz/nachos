@@ -107,9 +107,18 @@ class Thread {
     void Print() { cout << name; }
     void SelfTest();		// test whether thread impl is working
 
+    //DONE
+    void setBurstTime(int time){ burstTime =  time;}
+    int getBurstTime(){return burstTime; }
+    int nextBurstTime(){return 0.5 * (burstTime + worktime);} 
+                            //Calculate next burst time
+    
   private:
     // some of the private data for this class is listed above
     
+    //DONE TODO: Calculate workTime
+    int burstTime;      //Predicted burst time
+    int workTime;       //Actual work time
     int *stack; 	 	// Bottom of the stack 
 				// NULL if this is the main thread
 				// (If NULL, don't deallocate stack)

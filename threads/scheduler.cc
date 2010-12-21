@@ -29,11 +29,20 @@
 //	Initially, no ready threads.
 //----------------------------------------------------------------------
 
+//DONE
+static int
+SJFCompare(Thread* a,Thread* b){ 
+    if(a->TimeNeed() - b->TimeNeed() > 0) return 1;
+    else if(a->TimeNeed() - b->TimeNeed() < 0) return -1;
+    else return 0;
+}
+
 Scheduler::Scheduler()
 {
-//	schedulerType = type;DONE
+//	schedulerType = type;
+//DONE
 	if(schedulerType == RR)readyList = new List<Thread *>;
-  //  else if(schedulerType == SJF)readyList = new SortedList<Thread *>;
+    else if(schedulerType == SJF)readyList = new SortedList<Thread *>(SJFCompare);
 	toBeDestroyed = NULL;
 }
 
@@ -62,7 +71,10 @@ Scheduler::ReadyToRun (Thread *thread)
     DEBUG(dbgThread, "Putting thread on ready list: " << thread->getName());
 
     thread->setStatus(READY);
-    readyList->Append(thread);
+
+//DONE
+	if(schedulerType == RR) readyList->Append(thread);
+    else if(schedulerType == SJF) readyList->Insert(thread);
 }
 
 //----------------------------------------------------------------------
