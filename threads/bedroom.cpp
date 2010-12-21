@@ -2,40 +2,9 @@
 #include "utility.h"
 #include "main.h"
 
-// put a thread to sleep and sets when to wake it up.
-//
-void Bedroom::PutToBed(Thread* t, int x){
-
-  ASSERT(kernel->interrupt->getLevel() == IntOff); // should be atomic
-
-  DEBUG(dbgSleep, "** Thread " << t << " will sleep for " << x << " ticks...");
-
-  if( IsEmpty() ) _current_tick = 0;
-    // zeros _current_tick when possible,  to prevent overflow.
-
-  _beds.push_back( Bed(t, _current_tick +  x) );
-
-  kernel->interrupt->Schedule(this, x, TimerInt);
-    // perform a MorningCall on this bedroom x ticks later.
-
-  t->Sleep(false); // not finishing, thus pass in "false"
-}
-
-// wake up the threads that should get up.
-// this is the handler for "waking thread" interrupts
-//
-void Bedroom::CallBack(){
-  // check who should wake up
-  for(std::list<Bed>::iterator it = _beds.begin(); it != _beds.end(); ){
-
-    if(it->when >= _current_tick){    // should wake up this thread
-      DEBUG(dbgSleep, "** " << it->sleeper << " is waking up...");
-      kernel->scheduler->ReadyToRun(it->sleeper); // set thread status
-      it = _beds.erase(it);           // cleanup the bed
-    }
-    else
-      ++it;
-  }
-
+void Bed::CallBack(){
+  DEBUG(dbgSleep, "** " << _sleeper << " is waking up...");
+  kernel->scheduler->ReadyToRun(_sleeper); // set thread status
+  delete this;
 }
 

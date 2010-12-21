@@ -11,6 +11,7 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
+#include "bedroom.h" //DONE
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -52,17 +53,6 @@ Alarm::CallBack()
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
 
-    /* DONE: make _current_tick ticks every time the hardware timer ticks */
-
-    _bedroom.Tick();
-
-    /* within the interrupt handler, interrupt won't happen
-     (guarded by 'inHandler' within interrupt.h .) Don't need to
-     turn off interrupt here.*/
-
-
-    /* ---- */
-
     if (status == IdleMode) {	// is it time to quit?
         if (!interrupt->AnyFutureInterrupts()) {
 	    timer->Disable();	// turn off the timer
@@ -89,7 +79,12 @@ Alarm::WaitUntil(int x){
   IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
   Thread* t = kernel->currentThread;
 
-  _bedroom.PutToBed(t, x);
+  DEBUG(dbgSleep, "** Thread " << t << " will sleep for " << x << " ticks...");
+
+  kernel->interrupt->Schedule(new Bed(t), x, TimerInt); // set alarm clock
+      // the alarm clock will be fired by timer interrupt, x ticks later.
+
+  t->Sleep(false); // good night, Mr.t.
 
   (void) kernel->interrupt->SetLevel(oldLevel);
   // set the original interrupt level back.
