@@ -59,6 +59,7 @@ Alarm::CallBack()
       --(it->_tick_left); // take one tick away
 
       if(it->_tick_left == 0){ // should wake up this thread
+        DEBUG(dbgThread, "Thread " << (int)(it->_thread) << " is awakening.");
         it->_thread->setStatus(READY);  // set thread status
         _sleeping_list.erase(it);       // remove from _sleeping_list
       }
@@ -76,6 +77,7 @@ Alarm::CallBack()
 
 void
 Alarm::SleepThread(Thread* t, int x){
+  DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x " ticks...");
   _sleeping_list.append( SleepingEntry(t, x) );
 }
 

@@ -27,7 +27,7 @@
 class SleepingEntry {
   public:
     SleepingEntry(Thread* t, int x):_thread(t), _tick_left(x){}
-    operator == (const SleepingEntry& e){
+    bool operator == (const SleepingEntry& e){
       return (e._thread == _thread)
     }
 
