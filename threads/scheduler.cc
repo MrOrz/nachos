@@ -31,8 +31,9 @@
 
 Scheduler::Scheduler()
 {
-//	schedulerType = type;
-	readyList = new List<Thread *>; 
+//	schedulerType = type;DONE
+	if(schedulerType == RR)readyList = new List<Thread *>; 
+    else if(schedulerType == SJF)readyList = new SortedList<Thread *>; 
 	toBeDestroyed = NULL;
 } 
 

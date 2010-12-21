@@ -79,10 +79,10 @@ ExceptionHandler(ExceptionType which)
 			cout << "return value:" << val << endl;
 			kernel->currentThread->Finish();
 			break;
-    case SC_Sleep: /* DONE: implementation of Sleep() */
-      val=kernel->machine->ReadRegister(4); // load the argument x
-      // TODO: finish this
-      break;
+        case SC_Sleep: /* DONE: implementation of Sleep() */
+            val=kernel->machine->ReadRegister(4); // load the argument x
+            kernel->currentThread->WaitUntil(x);
+            break;
 		default:
 		    cerr << "Unexpected system call " << type << "\n";
  		    break;

@@ -81,3 +81,7 @@ Alarm::SleepThread(Thread* t, int x){
   _sleeping_list.append( SleepingEntry(t, x) );
 }
 
+void 
+Alarm::WaitUntil(int x){
+    SleepThread(currentThread,x);
+}
