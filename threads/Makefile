@@ -591,10 +591,7 @@ interrupt.o: ../machine/interrupt.cc ../lib/copyright.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/istream.tcc ../lib/list.cc \
   ../machine/callback.h ../threads/main.h ../threads/kernel.h \
   ../threads/thread.h ../threads/scheduler.h ../machine/stats.h \
-  ../threads/alarm.h ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc
+  ../threads/alarm.h ../machine/timer.h
 stats.o: ../machine/stats.cc ../lib/copyright.h ../lib/debug.h \
   ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -821,13 +818,10 @@ timer.o: ../machine/timer.cc ../lib/copyright.h ../machine/timer.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/istream.tcc \
   ../threads/kernel.h ../threads/thread.h ../threads/scheduler.h \
   ../lib/list.h ../lib/list.cc ../machine/interrupt.h ../machine/stats.h \
-  ../threads/alarm.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc
+  ../threads/alarm.h
 alarm.o: ../threads/alarm.cc ../lib/copyright.h ../threads/alarm.h \
   ../lib/utility.h ../machine/callback.h ../machine/timer.h \
-  ../threads/bedroom.h ../threads/thread.h ../lib/sysdep.h \
+  ../threads/main.h ../lib/debug.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/backward_warning.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/iostream \
@@ -937,11 +931,11 @@ alarm.o: ../threads/alarm.cc ../lib/copyright.h ../threads/alarm.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/typeinfo \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/istream \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/istream.tcc \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
+  ../threads/kernel.h ../threads/thread.h ../threads/scheduler.h \
+  ../lib/list.h ../lib/list.cc ../machine/interrupt.h ../machine/stats.h \
+  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc ../threads/main.h \
-  ../lib/debug.h ../threads/kernel.h ../threads/scheduler.h ../lib/list.h \
-  ../lib/list.cc ../machine/interrupt.h ../machine/stats.h
+  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc
 bedroom.o: ../threads/bedroom.cpp ../threads/bedroom.h \
   ../machine/callback.h ../lib/copyright.h ../threads/thread.h \
   ../lib/utility.h ../lib/sysdep.h \
@@ -1174,10 +1168,7 @@ kernel.o: ../threads/kernel.cc ../lib/copyright.h ../lib/debug.h \
   ../threads/main.h ../threads/kernel.h ../threads/thread.h \
   ../threads/scheduler.h ../lib/list.h ../lib/list.cc \
   ../machine/interrupt.h ../machine/callback.h ../machine/stats.h \
-  ../threads/alarm.h ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc ../threads/synch.h \
+  ../threads/alarm.h ../machine/timer.h ../threads/synch.h \
   ../threads/synchlist.h ../threads/synchlist.cc ../lib/libtest.h \
   ../machine/elevatortest.h
 main.o: ../threads/main.cc ../lib/copyright.h ../threads/main.h \
@@ -1294,10 +1285,7 @@ main.o: ../threads/main.cc ../lib/copyright.h ../threads/main.h \
   ../threads/kernel.h ../threads/thread.h ../threads/scheduler.h \
   ../lib/list.h ../lib/list.cc ../machine/interrupt.h \
   ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc
+  ../machine/timer.h
 scheduler.o: ../threads/scheduler.cc ../lib/copyright.h ../lib/debug.h \
   ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -1412,10 +1400,7 @@ scheduler.o: ../threads/scheduler.cc ../lib/copyright.h ../lib/debug.h \
   ../threads/scheduler.h ../lib/list.h ../lib/list.cc ../threads/thread.h \
   ../threads/main.h ../threads/kernel.h ../machine/interrupt.h \
   ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc
+  ../machine/timer.h
 synch.o: ../threads/synch.cc ../lib/copyright.h ../threads/synch.h \
   ../threads/thread.h ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -1529,10 +1514,7 @@ synch.o: ../threads/synch.cc ../lib/copyright.h ../threads/synch.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/istream.tcc ../lib/list.h \
   ../lib/debug.h ../lib/list.cc ../threads/main.h ../threads/kernel.h \
   ../threads/scheduler.h ../machine/interrupt.h ../machine/callback.h \
-  ../machine/stats.h ../threads/alarm.h ../machine/timer.h \
-  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc
+  ../machine/stats.h ../threads/alarm.h ../machine/timer.h
 synchlist.o: ../threads/synchlist.cc ../lib/copyright.h \
   ../threads/synchlist.h ../lib/list.h ../lib/debug.h ../lib/utility.h \
   ../lib/sysdep.h \
@@ -1648,11 +1630,7 @@ synchlist.o: ../threads/synchlist.cc ../lib/copyright.h \
   ../threads/synch.h ../threads/thread.h ../threads/main.h \
   ../threads/kernel.h ../threads/scheduler.h ../machine/interrupt.h \
   ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../threads/synchlist.cc
+  ../machine/timer.h ../threads/synchlist.cc
 thread.o: ../threads/thread.cc ../lib/copyright.h ../threads/thread.h \
   ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -1767,10 +1745,7 @@ thread.o: ../threads/thread.cc ../lib/copyright.h ../threads/thread.h \
   ../threads/switch.h ../threads/synch.h ../lib/list.h ../lib/debug.h \
   ../lib/list.cc ../threads/main.h ../threads/kernel.h \
   ../threads/scheduler.h ../machine/interrupt.h ../machine/callback.h \
-  ../machine/stats.h ../threads/alarm.h ../machine/timer.h \
-  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc
+  ../machine/stats.h ../threads/alarm.h ../machine/timer.h
 elevatortest.o: ../machine/elevatortest.cc ../lib/copyright.h \
   ../machine/elevatortest.h ../machine/elevator.h ../lib/utility.h \
   ../machine/callback.h ../lib/list.h ../lib/debug.h ../lib/sysdep.h \
@@ -1885,10 +1860,7 @@ elevatortest.o: ../machine/elevatortest.cc ../lib/copyright.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/istream.tcc ../lib/list.cc \
   ../threads/synch.h ../threads/thread.h ../threads/main.h \
   ../threads/kernel.h ../threads/scheduler.h ../machine/interrupt.h \
-  ../machine/stats.h ../threads/alarm.h ../machine/timer.h \
-  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc
+  ../machine/stats.h ../threads/alarm.h ../machine/timer.h
 elevator.o: ../machine/elevator.cc ../lib/copyright.h \
   ../machine/elevator.h ../lib/utility.h ../machine/callback.h \
   ../lib/list.h ../lib/debug.h ../lib/sysdep.h \
@@ -2003,10 +1975,7 @@ elevator.o: ../machine/elevator.cc ../lib/copyright.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/istream.tcc ../lib/list.cc \
   ../threads/kernel.h ../threads/thread.h ../threads/scheduler.h \
   ../machine/interrupt.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc ../threads/main.h
+  ../machine/timer.h ../threads/main.h
 # DEPENDENCIES MUST END AT END OF FILE
 # IF YOU PUT STUFF HERE IT WILL GO AWAY
 # see make depend above

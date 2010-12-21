@@ -595,11 +595,8 @@ interrupt.o: ../machine/interrupt.cc ../lib/copyright.h \
   ../threads/kernel.h ../threads/thread.h ../machine/machine.h \
   ../machine/translate.h ../userprog/addrspace.h ../filesys/filesys.h \
   ../filesys/openfile.h ../threads/scheduler.h ../machine/stats.h \
-  ../threads/alarm.h ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+  ../threads/alarm.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h
 stats.o: ../machine/stats.cc ../lib/copyright.h ../lib/debug.h \
   ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -828,14 +825,11 @@ timer.o: ../machine/timer.cc ../lib/copyright.h ../machine/timer.h \
   ../machine/machine.h ../machine/translate.h ../userprog/addrspace.h \
   ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
   ../lib/list.h ../lib/list.cc ../machine/interrupt.h ../machine/stats.h \
-  ../threads/alarm.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+  ../threads/alarm.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h
 alarm.o: ../threads/alarm.cc ../lib/copyright.h ../threads/alarm.h \
   ../lib/utility.h ../machine/callback.h ../machine/timer.h \
-  ../threads/bedroom.h ../threads/thread.h ../lib/sysdep.h \
+  ../threads/main.h ../lib/debug.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/backward_warning.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/iostream \
@@ -945,15 +939,14 @@ alarm.o: ../threads/alarm.cc ../lib/copyright.h ../threads/alarm.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/typeinfo \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/istream \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/istream.tcc \
+  ../userprog/userkernel.h ../threads/kernel.h ../threads/thread.h \
   ../machine/machine.h ../machine/translate.h ../userprog/addrspace.h \
-  ../filesys/filesys.h ../filesys/openfile.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
+  ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
+  ../lib/list.h ../lib/list.cc ../machine/interrupt.h ../machine/stats.h \
+  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
+  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc ../threads/main.h \
-  ../lib/debug.h ../userprog/userkernel.h ../threads/kernel.h \
-  ../threads/scheduler.h ../lib/list.h ../lib/list.cc \
-  ../machine/interrupt.h ../machine/stats.h ../filesys/synchdisk.h \
-  ../machine/disk.h ../threads/synch.h
+  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc
 bedroom.o: ../threads/bedroom.cpp ../threads/bedroom.h \
   ../machine/callback.h ../lib/copyright.h ../threads/thread.h \
   ../lib/utility.h ../lib/sysdep.h \
@@ -1192,13 +1185,9 @@ kernel.o: ../threads/kernel.cc ../lib/copyright.h ../lib/debug.h \
   ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
   ../threads/scheduler.h ../lib/list.h ../lib/list.cc \
   ../machine/interrupt.h ../machine/callback.h ../machine/stats.h \
-  ../threads/alarm.h ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
-  ../threads/synchlist.h ../threads/synchlist.cc ../lib/libtest.h \
-  ../machine/elevatortest.h
+  ../threads/alarm.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h ../threads/synchlist.h \
+  ../threads/synchlist.cc ../lib/libtest.h ../machine/elevatortest.h
 main.o: ../threads/main.cc ../lib/copyright.h ../threads/main.h \
   ../lib/debug.h ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -1315,11 +1304,8 @@ main.o: ../threads/main.cc ../lib/copyright.h ../threads/main.h \
   ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
   ../lib/list.h ../lib/list.cc ../machine/interrupt.h \
   ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h
 scheduler.o: ../threads/scheduler.cc ../lib/copyright.h ../lib/debug.h \
   ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -1436,11 +1422,8 @@ scheduler.o: ../threads/scheduler.cc ../lib/copyright.h ../lib/debug.h \
   ../filesys/filesys.h ../filesys/openfile.h ../threads/main.h \
   ../userprog/userkernel.h ../threads/kernel.h ../machine/interrupt.h \
   ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h
 synch.o: ../threads/synch.cc ../lib/copyright.h ../threads/synch.h \
   ../threads/thread.h ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -1557,11 +1540,7 @@ synch.o: ../threads/synch.cc ../lib/copyright.h ../threads/synch.h \
   ../lib/list.cc ../threads/main.h ../userprog/userkernel.h \
   ../threads/kernel.h ../threads/scheduler.h ../machine/interrupt.h \
   ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h
 synchlist.o: ../threads/synchlist.cc ../lib/copyright.h \
   ../threads/synchlist.h ../lib/list.h ../lib/debug.h ../lib/utility.h \
   ../lib/sysdep.h \
@@ -1679,11 +1658,8 @@ synchlist.o: ../threads/synchlist.cc ../lib/copyright.h \
   ../filesys/openfile.h ../threads/main.h ../userprog/userkernel.h \
   ../threads/kernel.h ../threads/scheduler.h ../machine/interrupt.h \
   ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synchlist.cc
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synchlist.cc
 thread.o: ../threads/thread.cc ../lib/copyright.h ../threads/thread.h \
   ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -1801,9 +1777,6 @@ thread.o: ../threads/thread.cc ../lib/copyright.h ../threads/thread.h \
   ../threads/main.h ../userprog/userkernel.h ../threads/kernel.h \
   ../threads/scheduler.h ../machine/interrupt.h ../machine/callback.h \
   ../machine/stats.h ../threads/alarm.h ../machine/timer.h \
-  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
   ../filesys/synchdisk.h ../machine/disk.h
 elevatortest.o: ../machine/elevatortest.cc ../lib/copyright.h \
   ../machine/elevatortest.h ../machine/elevator.h ../lib/utility.h \
@@ -1922,9 +1895,6 @@ elevatortest.o: ../machine/elevatortest.cc ../lib/copyright.h \
   ../filesys/openfile.h ../threads/main.h ../userprog/userkernel.h \
   ../threads/kernel.h ../threads/scheduler.h ../machine/interrupt.h \
   ../machine/stats.h ../threads/alarm.h ../machine/timer.h \
-  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
   ../filesys/synchdisk.h ../machine/disk.h
 elevator.o: ../machine/elevator.cc ../lib/copyright.h \
   ../machine/elevator.h ../lib/utility.h ../machine/callback.h \
@@ -2042,11 +2012,8 @@ elevator.o: ../machine/elevator.cc ../lib/copyright.h \
   ../machine/translate.h ../userprog/addrspace.h ../filesys/filesys.h \
   ../filesys/openfile.h ../threads/scheduler.h ../machine/interrupt.h \
   ../machine/stats.h ../threads/alarm.h ../machine/timer.h \
-  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc ../threads/main.h \
-  ../userprog/userkernel.h ../filesys/synchdisk.h ../machine/disk.h \
-  ../threads/synch.h
+  ../threads/main.h ../userprog/userkernel.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h
 addrspace.o: ../userprog/addrspace.cc ../lib/copyright.h \
   ../threads/main.h ../lib/debug.h ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -2163,12 +2130,8 @@ addrspace.o: ../userprog/addrspace.cc ../lib/copyright.h \
   ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
   ../lib/list.h ../lib/list.cc ../machine/interrupt.h \
   ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
-  ../bin/noff.h
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h ../bin/noff.h
 exception.o: ../userprog/exception.cc ../lib/copyright.h \
   ../threads/main.h ../lib/debug.h ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -2285,12 +2248,8 @@ exception.o: ../userprog/exception.cc ../lib/copyright.h \
   ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
   ../lib/list.h ../lib/list.cc ../machine/interrupt.h \
   ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h \
-  ../userprog/syscall.h
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h ../userprog/syscall.h
 synchconsole.o: ../userprog/synchconsole.cc ../lib/copyright.h \
   ../userprog/synchconsole.h ../lib/utility.h ../machine/callback.h \
   ../machine/console.h ../threads/synch.h ../threads/thread.h \
@@ -2409,9 +2368,6 @@ synchconsole.o: ../userprog/synchconsole.cc ../lib/copyright.h \
   ../lib/list.cc ../threads/main.h ../userprog/userkernel.h \
   ../threads/kernel.h ../threads/scheduler.h ../machine/interrupt.h \
   ../machine/stats.h ../threads/alarm.h ../machine/timer.h \
-  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
   ../filesys/synchdisk.h ../machine/disk.h
 userkernel.o: ../userprog/userkernel.cc ../lib/copyright.h \
   ../userprog/synchconsole.h ../lib/utility.h ../machine/callback.h \
@@ -2531,9 +2487,6 @@ userkernel.o: ../userprog/userkernel.cc ../lib/copyright.h \
   ../lib/list.cc ../threads/main.h ../userprog/userkernel.h \
   ../threads/kernel.h ../threads/scheduler.h ../machine/interrupt.h \
   ../machine/stats.h ../threads/alarm.h ../machine/timer.h \
-  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
   ../filesys/synchdisk.h ../machine/disk.h
 console.o: ../machine/console.cc ../lib/copyright.h ../machine/console.h \
   ../lib/utility.h ../machine/callback.h ../threads/main.h ../lib/debug.h \
@@ -2651,11 +2604,8 @@ console.o: ../machine/console.cc ../lib/copyright.h ../machine/console.h \
   ../machine/machine.h ../machine/translate.h ../userprog/addrspace.h \
   ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
   ../lib/list.h ../lib/list.cc ../machine/interrupt.h ../machine/stats.h \
-  ../threads/alarm.h ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+  ../threads/alarm.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h
 machine.o: ../machine/machine.cc ../lib/copyright.h ../machine/machine.h \
   ../lib/utility.h ../machine/translate.h ../threads/main.h \
   ../lib/debug.h ../lib/sysdep.h \
@@ -2772,11 +2722,8 @@ machine.o: ../machine/machine.cc ../lib/copyright.h ../machine/machine.h \
   ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
   ../threads/scheduler.h ../lib/list.h ../lib/list.cc \
   ../machine/interrupt.h ../machine/callback.h ../machine/stats.h \
-  ../threads/alarm.h ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+  ../threads/alarm.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../machine/disk.h ../threads/synch.h
 mipssim.o: ../machine/mipssim.cc ../lib/copyright.h ../lib/debug.h \
   ../lib/utility.h ../lib/sysdep.h \
   /usr/local/gcc-3.3.3/include/c++/3.3.3/backward/iostream.h \
@@ -2894,9 +2841,6 @@ mipssim.o: ../machine/mipssim.cc ../lib/copyright.h ../lib/debug.h \
   ../filesys/openfile.h ../threads/scheduler.h ../lib/list.h \
   ../lib/list.cc ../machine/interrupt.h ../machine/callback.h \
   ../machine/stats.h ../threads/alarm.h ../machine/timer.h \
-  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
   ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
 translate.o: ../machine/translate.cc ../lib/copyright.h ../threads/main.h \
   ../lib/debug.h ../lib/utility.h ../lib/sysdep.h \
@@ -3014,11 +2958,8 @@ translate.o: ../machine/translate.cc ../lib/copyright.h ../threads/main.h \
   ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
   ../lib/list.h ../lib/list.cc ../machine/interrupt.h \
   ../machine/callback.h ../machine/stats.h ../threads/alarm.h \
-  ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../machine/disk.h ../threads/synch.h
+  ../machine/timer.h ../filesys/synchdisk.h ../machine/disk.h \
+  ../threads/synch.h
 synchdisk.o: ../filesys/synchdisk.cc ../lib/copyright.h \
   ../filesys/synchdisk.h ../machine/disk.h ../lib/utility.h \
   ../machine/callback.h ../threads/synch.h ../threads/thread.h \
@@ -3136,10 +3077,7 @@ synchdisk.o: ../filesys/synchdisk.cc ../lib/copyright.h \
   ../filesys/filesys.h ../filesys/openfile.h ../lib/list.h ../lib/debug.h \
   ../lib/list.cc ../threads/main.h ../userprog/userkernel.h \
   ../threads/kernel.h ../threads/scheduler.h ../machine/interrupt.h \
-  ../machine/stats.h ../threads/alarm.h ../machine/timer.h \
-  ../threads/bedroom.h /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc
+  ../machine/stats.h ../threads/alarm.h ../machine/timer.h
 disk.o: ../machine/disk.cc ../lib/copyright.h ../machine/disk.h \
   ../lib/utility.h ../machine/callback.h ../threads/main.h ../lib/debug.h \
   ../lib/sysdep.h \
@@ -3256,11 +3194,8 @@ disk.o: ../machine/disk.cc ../lib/copyright.h ../machine/disk.h \
   ../machine/machine.h ../machine/translate.h ../userprog/addrspace.h \
   ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
   ../lib/list.h ../lib/list.cc ../machine/interrupt.h ../machine/stats.h \
-  ../threads/alarm.h ../machine/timer.h ../threads/bedroom.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/list \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/stl_list.h \
-  /usr/local/gcc-3.3.3/include/c++/3.3.3/bits/list.tcc \
-  ../filesys/synchdisk.h ../threads/synch.h
+  ../threads/alarm.h ../machine/timer.h ../filesys/synchdisk.h \
+  ../threads/synch.h
 # DEPENDENCIES MUST END AT END OF FILE
 # IF YOU PUT STUFF HERE IT WILL GO AWAY
 # see make depend above
