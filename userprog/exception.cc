@@ -54,13 +54,13 @@ ExceptionHandler(ExceptionType which)
 	int	type = kernel->machine->ReadRegister(2);
 	int	val;
 
-    switch (which) {
+  switch (which) {
 	case SyscallException:
-	    switch(type) {
+    switch(type) {
 		case SC_Halt:
-		    DEBUG(dbgAddr, "Shutdown, initiated by user program.\n");
-   		    kernel->interrupt->Halt();
-		    break;
+		  DEBUG(dbgAddr, "Shutdown, initiated by user program.\n");
+   		kernel->interrupt->Halt();
+		  break;
 		case SC_PrintInt:
 			val=kernel->machine->ReadRegister(4);
 			cout << "Print integer:" <<val << endl;
@@ -73,25 +73,26 @@ ExceptionHandler(ExceptionType which)
 			val = kernel->Exec(val);
 			kernel->machine->WriteRegister(2, val);
 			return;
-*/		case SC_Exit:
+*/
+    case SC_Exit:
 			DEBUG(dbgAddr, "Program exit\n");
 			val=kernel->machine->ReadRegister(4);
 			cout << "return value:" << val << endl;
 			kernel->currentThread->Finish();
 			break;
-        case SC_Sleep: /* DONE: implementation of Sleep() */
-            val=kernel->machine->ReadRegister(4); // load the argument x
-            kernel->alarm->WaitUntil(val);
-            break;
+    case SC_Sleep: /* DONE: implementation of Sleep() */
+        val=kernel->machine->ReadRegister(4); // load the argument x
+        kernel->alarm->WaitUntil(val);
+        return;
 		default:
 		    cerr << "Unexpected system call " << type << "\n";
  		    break;
-	    }
-	    break;
+    }
+	  break;
 	default:
 	    cerr << "Unexpected user mode exception" << which << "\n";
 	    break;
-    }
-    ASSERTNOTREACHED();
+  }
+  ASSERTNOTREACHED();
 }
 

@@ -28,17 +28,13 @@ void Bedroom::CallBack(){
   // check who should wake up
   for(std::list<Bed>::iterator it = _beds.begin(); it != _beds.end(); ){
 
-    std::list<Bed>::iterator to_erase = _beds.end();
-
     if(it->when >= _current_tick){    // should wake up this thread
-      it->sleeper->setStatus(READY);  // set thread status
-      to_erase = it;                  // going to erase it
+      //it->sleeper->setStatus(READY);  // set thread status
+      kernel->scheduler->ReadyToRun(it->sleeper);
+      it = _beds.erase(it);                  // going to erase it
     }
-
-    ++it;
-
-    // erase the bed after it++.
-    if(to_erase != _beds.end()) _beds.erase(to_erase);
+    else
+      ++it;
   }
 
 }
