@@ -39,7 +39,7 @@ Thread::Thread(char* threadName)
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;
-    busrtTime = TimerTicks;
+    burstTime = TimerTicks;  //Initially, 100  (timer.cc)  DONE
     for (int i = 0; i < MachineStateSize; i++) {
 	machineState[i] = NULL;		// not strictly necessary, since
 					// new thread ignores contents 
@@ -214,6 +214,8 @@ Thread::Yield ()
     nextThread = kernel->scheduler->FindNextToRun();
     if (nextThread != NULL) {
 	kernel->scheduler->ReadyToRun(this);
+    //DONE    
+    startTime = kernel->stats->userTicks;  //Record the start time from stats
 	kernel->scheduler->Run(nextThread, FALSE);
     }
     (void) kernel->interrupt->SetLevel(oldLevel);

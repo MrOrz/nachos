@@ -29,11 +29,12 @@
 //	Initially, no ready threads.
 //----------------------------------------------------------------------
 
-//TODO
+//DONE
+//Compare function for SJF
 static int
 SJFCompare(Thread* a,Thread* b){ 
-    if(a->TimeNeed() - b->TimeNeed() > 0) return 1;
-    else if(a->TimeNeed() - b->TimeNeed() < 0) return -1;
+    if(a->getBurstTime() > b->getBurstTime()) return 1;
+    else if(a->getBurstTime() < b->getBurstTime()) return -1;
     else return 0;
 }
 
@@ -41,7 +42,7 @@ Scheduler::Scheduler()
 {
 //	schedulerType = type;
 //DONE
-	if(schedulerType == RR)readyList = new List<Thread *>;
+	if(schedulerType == RR)readyList = new SortedList<Thread *>(0);
     else if(schedulerType == SJF)readyList = new SortedList<Thread *>(SJFCompare);
 	toBeDestroyed = NULL;
 }
@@ -73,8 +74,7 @@ Scheduler::ReadyToRun (Thread *thread)
     thread->setStatus(READY);
 
 //DONE
-	if(schedulerType == RR) readyList->Append(thread);
-    else if(schedulerType == SJF) readyList->Insert(thread);
+    readyList->Insert(thread);
 }
 
 //----------------------------------------------------------------------

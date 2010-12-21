@@ -37,12 +37,13 @@ class Scheduler {
 	void CheckToBeDestroyed();	// Check if thread that had been
     					// running needs to be deleted
 	void Print();			// Print contents of ready list
-    
+
+    SchedulerType getSchedulerType(){return schedulerType;}  //DONE
     // SelfTest for scheduler is implemented in class Thread
     
   private:
 	SchedulerType schedulerType;
-	List<Thread *> *readyList;	// queue of threads that are ready to run,
+	SortedList<Thread *> *readyList;	// queue of threads that are ready to run,
 					// but not running
 	Thread *toBeDestroyed;		// finishing thread to be destroyed
     					// by the next thread that runs

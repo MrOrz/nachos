@@ -71,8 +71,17 @@ Alarm::CallBack()
 	    timer->Disable();	// turn off the timer
 	}
     } else {			// there's someone to preempt
-	interrupt->YieldOnReturn();
+        //DONE
+        if(kernel->scheduler->getSchedulerType() == RR) interrupt->YieldOnReturn();
+        else if(kernel->scheduler->getSchedulerType() == SJF){ 
+            int worktime = kernel->stats->userTicks - kernel->currentThread->getStartTime();
+            kernel->currentThread->setBurstTime(worktime);
+            
+        }
+
     }
+    
+
 }
 
 

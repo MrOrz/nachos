@@ -110,15 +110,17 @@ class Thread {
     //DONE
     void setBurstTime(int time){ burstTime =  time;}
     int getBurstTime(){return burstTime; }
-    int nextBurstTime(){return 0.5 * (burstTime + worktime);} 
+    int getStartTime(){return startTime; }
+    int nextBurstTime(int worktime){ return int(0.5 * (burstTime + worktime));} 
                             //Calculate next burst time
     
   private:
     // some of the private data for this class is listed above
     
-    //DONE TODO: Calculate workTime
+    //DONE
     int burstTime;      //Predicted burst time
-    int workTime;       //Actual work time
+    int startTime;      //The start time of the thread
+
     int *stack; 	 	// Bottom of the stack 
 				// NULL if this is the main thread
 				// (If NULL, don't deallocate stack)
