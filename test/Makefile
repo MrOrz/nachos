@@ -6,7 +6,7 @@
 #
 #    Nachos assumes that the location of the program startup routine (the
 # 	location the kernel jumps to when the program initially starts up)
-#       is at location 0.  This means: start.o must be the first .o passed 
+#       is at location 0.  This means: start.o must be the first .o passed
 # 	to ld, in order for the routine "Start" to be loaded at location 0
 #
 
@@ -33,7 +33,7 @@ CPP = /lib/cpp
 INCDIR =-I../userprog -I../threads -I../lib
 CFLAGS = -G 0 -c $(INCDIR)
 
-all: halt shell matmult sort test1 test2
+all: halt shell matmult sort test1 test2 sleep1
 
 start.o: start.s ../userprog/syscall.h
 	$(CPP) $(CPPFLAGS) start.s > strt.s
@@ -72,4 +72,9 @@ test2: test2.o start.o
 	$(LD) $(LDFLAGS) start.o test2.o -o test2.coff
 	../bin/coff2noff test2.coff test2
 
+#sleep1.o: sleep1.c
+#	$(CC) $(CFLAGS) -c sleep1.c
+sleep1: sleep1.o start.o
+	$(LD) $(LDFLAGS) start.o sleep1.o -o sleep1.coff
+	../bin/coff2noff sleep1.coff sleep1
 
