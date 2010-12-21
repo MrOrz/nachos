@@ -1,19 +1,19 @@
-// debug.h 
+// debug.h
 //	Data structures for debugging routines.
 //
 //	The debugging routines allow the user to turn on selected
 //	debugging messages, controllable from the command line arguments
 //	passed to Nachos (-d).  You are encouraged to add your own
-//	debugging flags.  
+//	debugging flags.
 //
 // Copyright (c) 1992-1996 The Regents of the University of California.
-// All rights reserved.  See copyright.h for copyright notice and limitation 
+// All rights reserved.  See copyright.h for copyright notice and limitation
 // of liability and disclaimer of warranty provisions.
 
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#include "copyright.h"		
+#include "copyright.h"
 #include "utility.h"
 #include "sysdep.h"
 
@@ -28,6 +28,7 @@ const char dbgDisk = 'd'; 		// disk emulation (FILESYS)
 const char dbgFile = 'f'; 		// file system (FILESYS)
 const char dbgAddr = 'a'; 		// address spaces (USER_PROGRAM)
 const char dbgNet = 'n'; 		// network emulation (NETWORK)
+const char dbgSleep = 'z'; 		// Sleep emulation (proj2) zzzZZZZ  DONE.
 
 class Debug {
   public:
@@ -57,7 +58,7 @@ extern Debug *debug;
 //      If condition is false,  print a message and dump core.
 //	Useful for documenting assumptions in the code.
 //
-//	NOTE: needs to be a #define, to be able to print the location 
+//	NOTE: needs to be a #define, to be able to print the location
 //	where the error occurred.
 //----------------------------------------------------------------------
 #define ASSERT(condition)                                               \
@@ -72,7 +73,7 @@ extern Debug *debug;
 //	making the compiler whine).  Useful for documenting when
 //	code should not be reached.
 //
-//	NOTE: needs to be a #define, to be able to print the location 
+//	NOTE: needs to be a #define, to be able to print the location
 //	where the error occurred.
 //----------------------------------------------------------------------
 
@@ -83,3 +84,4 @@ extern Debug *debug;
     }
 
 #endif //DEBUG_H
+

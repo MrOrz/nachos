@@ -8,7 +8,7 @@ void Bedroom::PutToBed(Thread* t, int x){
 
   ASSERT(kernel->interrupt->getLevel() == IntOff); // should be atomic
 
-  DEBUG(dbgThread, "Thread " << t << " will sleep for " << x << " ticks...");
+  DEBUG(dbgSleep, "** Thread " << t << " will sleep for " << x << " ticks...");
 
   if( IsEmpty() ) _current_tick = 0;
     // zeros _current_tick when possible,  to prevent overflow.
@@ -29,9 +29,9 @@ void Bedroom::CallBack(){
   for(std::list<Bed>::iterator it = _beds.begin(); it != _beds.end(); ){
 
     if(it->when >= _current_tick){    // should wake up this thread
-      //it->sleeper->setStatus(READY);  // set thread status
-      kernel->scheduler->ReadyToRun(it->sleeper);
-      it = _beds.erase(it);                  // going to erase it
+      DEBUG(dbgSleep, "** " << it->sleeper << " is waking up...");
+      kernel->scheduler->ReadyToRun(it->sleeper); // set thread status
+      it = _beds.erase(it);           // cleanup the bed
     }
     else
       ++it;
