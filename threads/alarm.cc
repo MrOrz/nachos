@@ -74,7 +74,7 @@ Alarm::CallBack()
 
         it = _sleeping_list.erase(it);       // remove from _sleeping_list
         status = SystemMode;
-        if(it == _sleeping_list.end())break;
+     
       }
       else ++it;
 
@@ -97,7 +97,7 @@ Alarm::CallBack()
             kernel->currentThread->setStartTime(kernel->stats->userTicks);
             
             cout <<"Actual Work Time:"<<worktime<<" ";
-            cout <<"New Burst Time:"<<kernel->currentThread->getBurstTime()<<endl;
+            cout <<"New Burst Time:"<<kernel->currentThread->getBurstTime()<<endl<<endl;
         }
 
     }

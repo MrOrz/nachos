@@ -98,7 +98,8 @@ Scheduler::FindNextToRun ()
 
     if (readyList->IsEmpty()) {
 	return NULL;
-    } else {        
+    } else {
+        kernel->currentThread->setStartTime(kernel->stats->userTicks);
     	return readyList->RemoveFront();
     }
 }
