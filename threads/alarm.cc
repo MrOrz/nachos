@@ -11,7 +11,6 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
-//#include "interrupt.h" // setLevel() DONE
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -53,25 +52,15 @@ Alarm::CallBack()
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
 
-    /* DONE: checking _sleeping_list for threads to wake */
+    /* DONE: make _current_tick ticks every time the hardware timer ticks */
+
+    _bedroom.Tick();
 
     /* within the interrupt handler, interrupt won't happen
      (guarded by 'inHandler' within interrupt.h .) Don't need to
      turn off interrupt here.*/
 
-    // TODO: make use of interrupts instead.
-    // checking & removing _tick_left everytime is silly :P
 
-    for(std::list<SleepingEntry>::iterator it = _sleeping_list.begin();
-        it != _sleeping_list.end(); ++it ){
-      --(it->_tick_left); // take one tick away
-
-      if(it->_tick_left == 0){ // should wake up this thread
-        DEBUG(dbgThread, "Thread " << (int)(it->_thread) << " is awakening.");
-        it->_thread->setStatus(READY);  // set thread status
-        _sleeping_list.erase(it);       // remove from _sleeping_list
-      }
-    }
     /* ---- */
 
     if (status == IdleMode) {	// is it time to quit?
@@ -79,13 +68,14 @@ Alarm::CallBack()
 	    timer->Disable();	// turn off the timer
 	}
     } else {			// there's someone to preempt
+        interrupt->YieldOnReturn();
         //DONE
-        if(kernel->scheduler->getSchedulerType() == RR) interrupt->YieldOnReturn();
+/*        if(kernel->scheduler->getSchedulerType() == RR) interrupt->YieldOnReturn();
         else if(kernel->scheduler->getSchedulerType() == SJF){
             int worktime = kernel->stats->userTicks - kernel->currentThread->getStartTime();
             kernel->currentThread->setBurstTime(worktime);
 
-        }
+        }*/
 
     }
 
@@ -97,12 +87,9 @@ void
 Alarm::WaitUntil(int x){
   // manipulating interrupts, thus turn off interrupt.
   IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
-
   Thread* t = kernel->currentThread;
-  DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x << " ticks...");
 
-  _sleeping_list.push_back( SleepingEntry(t, x) );
-  t->Sleep(false); // not finishing, thus pass in "false"
+  _bedroom.PutToBed(t, x);
 
   (void) kernel->interrupt->SetLevel(oldLevel);
   // set the original interrupt level back.

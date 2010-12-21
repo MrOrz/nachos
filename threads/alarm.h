@@ -21,22 +21,7 @@
 #include "utility.h"
 #include "callback.h"
 #include "timer.h"
-#include "thread.h"  // SleepingEntry Thread* DONE
-#include <list>      // _sleeping_list        DONE
-
-// DONE: sleeping list entry
-class SleepingEntry {
-  friend class Alarm;
-  public:
-    SleepingEntry(Thread * t, int x):_thread(t), _tick_left(x){}
-    bool operator == (const SleepingEntry& e){
-      return (e._thread == _thread);
-    }
-
-  private:
-    Thread* _thread;
-    int _tick_left;
-};
+#include "bedroom.h" //DONE
 
 // The following class defines a software alarm clock.
 class Alarm : public CallBackObj {
@@ -49,8 +34,7 @@ class Alarm : public CallBackObj {
 
   private:
     Timer *timer;		// the hardware timer device
-    std::list<SleepingEntry> _sleeping_list; // DONE: managing slept threads
-
+    Bedroom _bedroom; // bedroom for the sleeping threads. DONE
     void CallBack();		// called when the hardware
 				// timer generates an interrupt
 };
