@@ -150,8 +150,7 @@ void
 Thread::Begin ()
 {
     ASSERT(this == kernel->currentThread);
-    DEBUG(dbgThread, "Beginning thread: " << name);
-    
+    DEBUG(dbgThread, "Beginning thread: " << name);        
     kernel->scheduler->CheckToBeDestroyed();
     kernel->interrupt->Enable();
 }
@@ -215,7 +214,6 @@ Thread::Yield ()
     if (nextThread != NULL) {
 	kernel->scheduler->ReadyToRun(this);
     //DONE    
-    startTime = kernel->stats->userTicks;  //Record the start time from stats
 	kernel->scheduler->Run(nextThread, FALSE);
     }
     (void) kernel->interrupt->SetLevel(oldLevel);
