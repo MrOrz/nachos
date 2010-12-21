@@ -70,8 +70,8 @@ Alarm::CallBack()
       if(it->_tick_left == -1){ // should wake up this thread
         DEBUG(dbgThread, "Thread " << (int)(it->_thread) << " is awakening.");        
         cout <<"Thread " << (int)(it->_thread) << " is awakening." <<endl;;
-
         kernel->scheduler->ReadyToRun(it->_thread);
+
         it = _sleeping_list.erase(it);       // remove from _sleeping_list
         status = SystemMode;
         if(it == _sleeping_list.end())break;
