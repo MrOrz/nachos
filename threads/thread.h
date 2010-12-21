@@ -110,9 +110,9 @@ class Thread {
     //DONE
     void setBurstTime(int time){ burstTime =  time;}
     int getBurstTime(){return burstTime; }
+    void setStartTime(int time){startTime = time; }
     int getStartTime(){return startTime; }
-    int nextBurstTime(int worktime){ return int(0.5 * (burstTime + worktime));} 
-                            //Calculate next burst time
+    
     
   private:
     // some of the private data for this class is listed above

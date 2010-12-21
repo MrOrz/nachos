@@ -90,9 +90,14 @@ Alarm::CallBack()
         //DONE
         if(kernel->scheduler->getSchedulerType() == RR) interrupt->YieldOnReturn();
         else if(kernel->scheduler->getSchedulerType() == SJF){
-            int worktime = kernel->stats->userTicks - kernel->currentThread->getStartTime();
-            kernel->currentThread->setBurstTime(worktime);
-
+            cout <<"Original Burst Time:"<<kernel->currentThread->getBurstTime()<<" ";
+            int worktime = kernel->stats->userTicks - kernel->currentThread->getStartTime();            
+            kernel->currentThread
+                ->setBurstTime(0.5 * (kernel->currentThread->getBurstTime() + worktime));
+            kernel->currentThread->setStartTime(kernel->stats->userTicks);
+            
+            cout <<"Actual Work Time:"<<worktime<<" ";
+            cout <<"New Burst Time:"<<kernel->currentThread->getBurstTime()<<endl;
         }
 
     }
