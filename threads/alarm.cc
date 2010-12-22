@@ -11,7 +11,6 @@
 #include "copyright.h"
 #include "alarm.h"
 #include "main.h"
-#include "bedroom.h" //DONE
 
 //----------------------------------------------------------------------
 // Alarm::Alarm
@@ -52,28 +51,27 @@ Alarm::CallBack()
 {
     Interrupt *interrupt = kernel->interrupt;
     MachineStatus status = interrupt->getStatus();
+    bool woken =  _bedroom.MorningCall(); // advance the time inside the bedroom
+                                          // returns true when any thread woken
 
-    if (status == IdleMode) {	// is it time to quit?
-        if (!interrupt->AnyFutureInterrupts()) {
-	    timer->Disable();	// turn off the timer
-	}
+    if (status == IdleMode && _bedroom.IsEmpty() ) {// is it time to quit?
+        if (!interrupt->AnyFutureInterrupts()  && !woken) {
+	        timer->Disable();	// turn off the timer
+	      }
     } else {			// there's someone to preempt
         //DONE
         if(kernel->scheduler->getSchedulerType() == RR) interrupt->YieldOnReturn();
-
     }
-
-
 }
-
 
 void
 Alarm::WaitUntil(int x){
 
-  // manipulating interrupts, thus turn off interrupt.
+  // turn off interrupt temporarily.
   IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
   Thread* t = kernel->currentThread;
 
+  // SJF burst time evaluation
   if(kernel->scheduler->getSchedulerType() == SJF){
     int worktime = kernel->stats->userTicks - t->getStartTime();
     t->setBurstTime(0.5 * (t->getBurstTime() + worktime));
@@ -83,12 +81,7 @@ Alarm::WaitUntil(int x){
     cout <<"Next Burst Time:"<<t->getBurstTime()<<endl<<endl;
   }
 
-  DEBUG(dbgSleep, "** Thread " << t << " will sleep for " << x << " ticks...");
-
-  kernel->interrupt->Schedule(new Bed(t), x, TimerInt); // set alarm clock
-      // the alarm clock will be fired by timer interrupt, x ticks later.
-
-  t->Sleep(false); // good night, Mr.t.
+  _bedroom.PutToBed(t, x);  // put t to bed
 
   (void) kernel->interrupt->SetLevel(oldLevel);
   // set the original interrupt level back.
