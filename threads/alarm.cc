@@ -83,11 +83,6 @@ Alarm::WaitUntil(int x){
     cout <<"Next Burst Time:"<<t->getBurstTime()<<endl<<endl;
   }
 
-
-
-
-  DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x << " ticks...");
-
   DEBUG(dbgSleep, "** Thread " << t << " will sleep for " << x << " ticks...");
 
   kernel->interrupt->Schedule(new Bed(t), x, TimerInt); // set alarm clock
