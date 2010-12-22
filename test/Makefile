@@ -84,3 +84,15 @@ sleeplong: sleeplong.o start.o
 	$(LD) $(LDFLAGS) start.o sleeplong.o -o sleeplong.coff
 	../bin/coff2noff sleeplong.coff sleeplong
 
+#sleep2.o: sleep2.c
+#	$(CC) $(CFLAGS) -c sleep1.c
+sleep2: sleep2.o start.o
+	$(LD) $(LDFLAGS) start.o sleep2.o -o sleep2.coff
+	../bin/coff2noff sleep2.coff sleep2
+
+#sleep3.o: sleep3.c
+#	$(CC) $(CFLAGS) -c sleep3.c
+sleep3: sleep3.o start.o
+	$(LD) $(LDFLAGS) start.o sleep3.o -o sleep3.coff
+	../bin/coff2noff sleep3.coff sleep3
+
