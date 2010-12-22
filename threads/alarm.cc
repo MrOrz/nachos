@@ -58,7 +58,6 @@ Alarm::CallBack()
 	    timer->Disable();	// turn off the timer
 	}
     } else {			// there's someone to preempt
-        interrupt->YieldOnReturn();
         //DONE
         if(kernel->scheduler->getSchedulerType() == RR) interrupt->YieldOnReturn();
 
@@ -76,10 +75,10 @@ Alarm::WaitUntil(int x){
   Thread* t = kernel->currentThread;
 
   if(kernel->scheduler->getSchedulerType() == SJF){
-    int worktime = kernel->stats->userTicks - t->getStartTime();            
+    int worktime = kernel->stats->userTicks - t->getStartTime();
     t->setBurstTime(0.5 * (t->getBurstTime() + worktime));
     t->setStartTime(kernel->stats->userTicks);
-          
+
     cout <<"Actual Work Time:"<<worktime<<endl;
     cout <<"Next Burst Time:"<<t->getBurstTime()<<endl<<endl;
   }
