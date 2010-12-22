@@ -61,16 +61,6 @@ Alarm::CallBack()
         interrupt->YieldOnReturn();
         //DONE
         if(kernel->scheduler->getSchedulerType() == RR) interrupt->YieldOnReturn();
-        else if(kernel->scheduler->getSchedulerType() == SJF){
-            cout <<"Original Burst Time:"<<kernel->currentThread->getBurstTime()<<" ";
-            int worktime = kernel->stats->userTicks - kernel->currentThread->getStartTime();            
-            kernel->currentThread
-                ->setBurstTime(0.5 * (kernel->currentThread->getBurstTime() + worktime));
-            kernel->currentThread->setStartTime(kernel->stats->userTicks);
-            
-            cout <<"Actual Work Time:"<<worktime<<" ";
-            cout <<"New Burst Time:"<<kernel->currentThread->getBurstTime()<<endl<<endl;
-        }
 
     }
 
@@ -84,6 +74,20 @@ Alarm::WaitUntil(int x){
   // manipulating interrupts, thus turn off interrupt.
   IntStatus oldLevel = kernel->interrupt->SetLevel(IntOff);
   Thread* t = kernel->currentThread;
+
+  if(kernel->scheduler->getSchedulerType() == SJF){
+    int worktime = kernel->stats->userTicks - t->getStartTime();            
+    t->setBurstTime(0.5 * (t->getBurstTime() + worktime));
+    t->setStartTime(kernel->stats->userTicks);
+          
+    cout <<"Actual Work Time:"<<worktime<<endl;
+    cout <<"Next Burst Time:"<<t->getBurstTime()<<endl<<endl;
+  }
+
+
+
+
+  DEBUG(dbgThread, "Thread " << (int)t << " will sleep for " << x << " ticks...");
 
   DEBUG(dbgSleep, "** Thread " << t << " will sleep for " << x << " ticks...");
 
