@@ -1,8 +1,23 @@
+Entering main
 Total threads number is 3
+Forking thread: test/sjftest1-1 f(a): 134597136 0x9aa76c0
+Putting thread on ready list: test/sjftest1-1
 Thread test/sjftest1-1 is executing.
+Forking thread: test/sjftest1-2 f(a): 134597136 0x9aab8d8
+Putting thread on ready list: test/sjftest1-2
 Thread test/sjftest1-2 is executing.
+Forking thread: test/sjftest1-3 f(a): 134597136 0x9aafaf0
+Putting thread on ready list: test/sjftest1-3
 Thread test/sjftest1-3 is executing.
-Current Burst Time:100
+Finishing thread: main
+Sleeping thread: main
+Now the threads are: 
+  0x9aa76c0 , Burst Time: 100
+  0x9aab8d8 , Burst Time: 100
+  0x9aafaf0 , Burst Time: 100
+Switching from: main to: test/sjftest1-1
+Beginning thread: test/sjftest1-1
+Deleting thread: main
 Print integer:0
 Print integer:1
 Print integer:2
@@ -14,14 +29,27 @@ Print integer:7
 Print integer:8
 Print integer:9
 return value:0
-Current Burst Time:100
+Finishing thread: test/sjftest1-1
+Sleeping thread: test/sjftest1-1
+Now the threads are: 
+  0x9aab8d8 , Burst Time: 100
+  0x9aafaf0 , Burst Time: 100
+Switching from: test/sjftest1-1 to: test/sjftest1-2
+Beginning thread: test/sjftest1-2
+Deleting thread: test/sjftest1-1
 Print integer:100
 Print integer:101
 Print integer:102
 Print integer:103
 Print integer:104
 return value:0
-Current Burst Time:100
+Finishing thread: test/sjftest1-2
+Sleeping thread: test/sjftest1-2
+Now the threads are: 
+  0x9aafaf0 , Burst Time: 100
+Switching from: test/sjftest1-2 to: test/sjftest1-3
+Beginning thread: test/sjftest1-3
+Deleting thread: test/sjftest1-2
 Print integer:200
 Print integer:201
 Print integer:202
@@ -38,6 +66,8 @@ Print integer:212
 Print integer:213
 Print integer:214
 return value:0
+Finishing thread: test/sjftest1-3
+Sleeping thread: test/sjftest1-3
 No threads ready or runnable, and no pending interrupts.
 Assuming the program completed.
 Machine halting!
