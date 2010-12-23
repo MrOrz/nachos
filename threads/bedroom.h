@@ -6,7 +6,7 @@
 
 class Bedroom{
   public:
-    Bedroom():_current_tick(0){};
+    Bedroom():_current_interrupt(0){};
     void PutToBed(Thread* t, int x);
       // put a thread to sleep and sets when to wake it up.
 
@@ -22,7 +22,7 @@ class Bedroom{
       int when; // when to wake up
     };
 
-    int _current_tick;    // the "clock" hanging on the wall of this bedroom
+    int _current_interrupt;    // the "clock" hanging on the wall of this bedroom
     std::list<Bed> _beds; // managing slept threads
 };
 

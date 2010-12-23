@@ -77,8 +77,12 @@ Alarm::WaitUntil(int x){
     t->setBurstTime(0.5 * (t->getBurstTime() + worktime));
     t->setStartTime(kernel->stats->userTicks);
 
-    cout <<"Actual Work Time:"<<worktime<<endl;
-    cout <<"Next Burst Time:"<<t->getBurstTime()<<endl<<endl;
+    DEBUG(dbgSleep, "Thread " << t << " go to sleep");
+    DEBUG(dbgSleep, "Actual Work Time:" << worktime);
+    DEBUG(dbgSleep, "Next Burst Time:" << t->getBurstTime());
+//    cout << "Thread " << (int)t << "go to sleep" << endl;
+//    cout << "Actual Work Time:" << worktime << endl;
+//    cout << "Next Burst Time:" << t->getBurstTime() << endl;
   }
 
   _bedroom.PutToBed(t, x);  // put t to bed
