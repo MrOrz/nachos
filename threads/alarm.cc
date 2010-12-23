@@ -77,7 +77,7 @@ Alarm::WaitUntil(int x){
     t->setBurstTime(0.5 * (t->getBurstTime() + worktime));
     t->setStartTime(kernel->stats->userTicks);
 
-    DEBUG(dbgSleep, "** Thread " << t << " go to sleep");
+    DEBUG(dbgSleep, "Thread " << t << " go to sleep");
     DEBUG(dbgSleep, "Actual Work Time:" << worktime);
     DEBUG(dbgSleep, "Next Burst Time:" << t->getBurstTime());
 //    cout << "Thread " << (int)t << "go to sleep" << endl;

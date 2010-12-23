@@ -1,20 +1,20 @@
 Entering main
 Total threads number is 3
-Forking thread: test/sjftest2-1 f(a): 134597136 0x94b06c0
+Forking thread: test/sjftest2-1 f(a): 134597108 0x9c306c0
 Putting thread on ready list: test/sjftest2-1
 Thread test/sjftest2-1 is executing.
-Forking thread: test/sjftest2-2 f(a): 134597136 0x94b48d8
+Forking thread: test/sjftest2-2 f(a): 134597108 0x9c348d8
 Putting thread on ready list: test/sjftest2-2
 Thread test/sjftest2-2 is executing.
-Forking thread: test/sjftest2-3 f(a): 134597136 0x94b8af0
+Forking thread: test/sjftest2-3 f(a): 134597108 0x9c38af0
 Putting thread on ready list: test/sjftest2-3
 Thread test/sjftest2-3 is executing.
 Finishing thread: main
 Sleeping thread: main
 Now the threads are: 
-  0x94b06c0 , Burst Time: 100
-  0x94b48d8 , Burst Time: 100
-  0x94b8af0 , Burst Time: 100
+  0x9c306c0 , Burst Time: 100
+  0x9c348d8 , Burst Time: 100
+  0x9c38af0 , Burst Time: 100
 Switching from: main to: test/sjftest2-1
 Beginning thread: test/sjftest2-1
 Deleting thread: main
@@ -28,14 +28,14 @@ Print integer:6
 Print integer:7
 Print integer:8
 Print integer:9
-** Thread 0x94b06c0 go to sleep
+Thread 0x9c306c0 go to sleep
 Actual Work Time:190
 Next Burst Time:145
-** Thread 0x94b06c0 will wake up at tick 100.
+** Thread 0x9c306c0 will wake up at interrupt 102.
 Sleeping thread: test/sjftest2-1
 Now the threads are: 
-  0x94b48d8 , Burst Time: 100
-  0x94b8af0 , Burst Time: 100
+  0x9c348d8 , Burst Time: 100
+  0x9c38af0 , Burst Time: 100
 Switching from: test/sjftest2-1 to: test/sjftest2-2
 Beginning thread: test/sjftest2-2
 Print integer:100
@@ -43,44 +43,44 @@ Print integer:101
 Print integer:102
 Print integer:103
 Print integer:104
-** Thread 0x94b48d8 go to sleep
+Thread 0x9c348d8 go to sleep
 Actual Work Time:106
 Next Burst Time:103
-** Thread 0x94b48d8 will wake up at tick 22.
+** Thread 0x9c348d8 will wake up at interrupt 24.
 Sleeping thread: test/sjftest2-2
 Now the threads are: 
-  0x94b8af0 , Burst Time: 100
+  0x9c38af0 , Burst Time: 100
 Switching from: test/sjftest2-2 to: test/sjftest2-3
 Beginning thread: test/sjftest2-3
 Print integer:200
 Print integer:201
-** Thread 0x94b8af0 go to sleep
+Thread 0x9c38af0 go to sleep
 Actual Work Time:55
 Next Burst Time:77
-** Thread 0x94b8af0 will wake up at tick 22.
+** Thread 0x9c38af0 will wake up at interrupt 24.
 Sleeping thread: test/sjftest2-3
--- current tick is 10
--- current tick is 20
-** 0x94b48d8 is waking up...
+-- current interrupt is 10
+-- current interrupt is 20
+** 0x9c348d8 is waking up...
 Putting thread on ready list: test/sjftest2-2
-** 0x94b8af0 is waking up...
+** 0x9c38af0 is waking up...
 Putting thread on ready list: test/sjftest2-3
 Now the threads are: 
-  0x94b8af0 , Burst Time: 77
-  0x94b48d8 , Burst Time: 103
+  0x9c38af0 , Burst Time: 77
+  0x9c348d8 , Burst Time: 103
 Switching from: test/sjftest2-3 to: test/sjftest2-3
 Now in thread: test/sjftest2-3
 Current Burst Time: 77
 Print integer:202
 Print integer:203
 Print integer:204
-** Thread 0x94b8af0 go to sleep
+Thread 0x9c38af0 go to sleep
 Actual Work Time:66
 Next Burst Time:71
-** Thread 0x94b8af0 will wake up at tick 42.
+** Thread 0x9c38af0 will wake up at interrupt 44.
 Sleeping thread: test/sjftest2-3
 Now the threads are: 
-  0x94b48d8 , Burst Time: 103
+  0x9c348d8 , Burst Time: 103
 Switching from: test/sjftest2-3 to: test/sjftest2-2
 Now in thread: test/sjftest2-2
 Current Burst Time: 103
@@ -102,12 +102,12 @@ Print integer:119
 return value:0
 Finishing thread: test/sjftest2-2
 Sleeping thread: test/sjftest2-2
--- current tick is 30
--- current tick is 40
-** 0x94b8af0 is waking up...
+-- current interrupt is 30
+-- current interrupt is 40
+** 0x9c38af0 is waking up...
 Putting thread on ready list: test/sjftest2-3
 Now the threads are: 
-  0x94b8af0 , Burst Time: 71
+  0x9c38af0 , Burst Time: 71
 Switching from: test/sjftest2-2 to: test/sjftest2-3
 Now in thread: test/sjftest2-3
 Current Burst Time: 71
@@ -130,16 +130,16 @@ Print integer:219
 return value:0
 Finishing thread: test/sjftest2-3
 Sleeping thread: test/sjftest2-3
--- current tick is 50
--- current tick is 60
--- current tick is 70
--- current tick is 80
--- current tick is 90
--- current tick is 100
-** 0x94b06c0 is waking up...
+-- current interrupt is 50
+-- current interrupt is 60
+-- current interrupt is 70
+-- current interrupt is 80
+-- current interrupt is 90
+-- current interrupt is 100
+** 0x9c306c0 is waking up...
 Putting thread on ready list: test/sjftest2-1
 Now the threads are: 
-  0x94b06c0 , Burst Time: 145
+  0x9c306c0 , Burst Time: 145
 Switching from: test/sjftest2-3 to: test/sjftest2-1
 Now in thread: test/sjftest2-1
 Current Burst Time: 145
