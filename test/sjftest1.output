@@ -1,63 +1,32 @@
-Entering main
 Total threads number is 3
-Forking thread: test/sjftest1-1 f(a): 134597108 0x883f6c0
-Putting thread on ready list: test/sjftest1-1
 Thread test/sjftest1-1 is executing.
-Forking thread: test/sjftest1-2 f(a): 134597108 0x88438d8
-Putting thread on ready list: test/sjftest1-2
 Thread test/sjftest1-2 is executing.
-Forking thread: test/sjftest1-3 f(a): 134597108 0x8847af0
-Putting thread on ready list: test/sjftest1-3
 Thread test/sjftest1-3 is executing.
-Finishing thread: main
-Sleeping thread: main
-Now the threads are: 
-  0x883f6c0 , Burst Time: 100
-  0x88438d8 , Burst Time: 100
-  0x8847af0 , Burst Time: 100
-Switching from: main to: test/sjftest1-1
-Beginning thread: test/sjftest1-1
-Deleting thread: main
 Print integer:0
 Print integer:1
+Print integer:100
+Print integer:101
+Print integer:102
+Print integer:103
+Print integer:104
+Print integer:200
+Print integer:201
+Print integer:202
+Print integer:203
+Print integer:204
 Print integer:2
 Print integer:3
 Print integer:4
 Print integer:5
 Print integer:6
 Print integer:7
-Print integer:8
-Print integer:9
 return value:0
-Finishing thread: test/sjftest1-1
-Sleeping thread: test/sjftest1-1
-Now the threads are: 
-  0x88438d8 , Burst Time: 100
-  0x8847af0 , Burst Time: 100
-Switching from: test/sjftest1-1 to: test/sjftest1-2
-Beginning thread: test/sjftest1-2
-Deleting thread: test/sjftest1-1
-Print integer:100
-Print integer:101
-Print integer:102
-Print integer:103
-Print integer:104
-return value:0
-Finishing thread: test/sjftest1-2
-Sleeping thread: test/sjftest1-2
-Now the threads are: 
-  0x8847af0 , Burst Time: 100
-Switching from: test/sjftest1-2 to: test/sjftest1-3
-Beginning thread: test/sjftest1-3
-Deleting thread: test/sjftest1-2
-Print integer:200
-Print integer:201
-Print integer:202
-Print integer:203
-Print integer:204
 Print integer:205
 Print integer:206
 Print integer:207
+Print integer:8
+Print integer:9
+return value:0
 Print integer:208
 Print integer:209
 Print integer:210
@@ -66,13 +35,11 @@ Print integer:212
 Print integer:213
 Print integer:214
 return value:0
-Finishing thread: test/sjftest1-3
-Sleeping thread: test/sjftest1-3
 No threads ready or runnable, and no pending interrupts.
 Assuming the program completed.
 Machine halting!
 
-Ticks: total 700, idle 43, system 70, user 587
+Ticks: total 800, idle 73, system 140, user 587
 Disk I/O: reads 0, writes 0
 Console I/O: reads 0, writes 0
 Paging: faults 0
