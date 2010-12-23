@@ -33,7 +33,7 @@ CPP = /lib/cpp
 INCDIR =-I../userprog -I../threads -I../lib
 CFLAGS = -G 0 -c $(INCDIR)
 
-all: halt shell matmult sort test1 test2 sleep1
+all: halt shell matmult sort test1 test2 sleep1 sleep2 sleep3 sjftest*-*
 
 start.o: start.s ../userprog/syscall.h
 	$(CPP) $(CPPFLAGS) start.s > strt.s
@@ -95,4 +95,40 @@ sleep2: sleep2.o start.o
 sleep3: sleep3.o start.o
 	$(LD) $(LDFLAGS) start.o sleep3.o -o sleep3.coff
 	../bin/coff2noff sleep3.coff sleep3
+
+#sjftest1-1.o: sjftest1-1.c
+#	$(CC) $(CFLAGS) -c sjftest1-1.c
+sjftest1-1: sjftest1-1.o start.o
+	$(LD) $(LDFLAGS) start.o sjftest1-1.o -o sjftest1-1.coff
+	../bin/coff2noff sjftest1-1.coff sjftest1-1
+
+#sjftest1-2.o: sjftest1-2.c
+#	$(CC) $(CFLAGS) -c sjftest1-2.c
+sjftest1-2: sjftest1-2.o start.o
+	$(LD) $(LDFLAGS) start.o sjftest1-2.o -o sjftest1-2.coff
+	../bin/coff2noff sjftest1-2.coff sjftest1-2
+
+#sjftest1-3.o: sjftest1-3.c
+#	$(CC) $(CFLAGS) -c sjftest1-3.c
+sjftest1-3: sjftest1-3.o start.o
+	$(LD) $(LDFLAGS) start.o sjftest1-3.o -o sjftest1-3.coff
+	../bin/coff2noff sjftest1-3.coff sjftest1-3
+
+#sjftest2-1.o: sjftest2-1.c
+#	$(CC) $(CFLAGS) -c sjftest2-1.c
+sjftest2-1: sjftest2-1.o start.o
+	$(LD) $(LDFLAGS) start.o sjftest2-1.o -o sjftest2-1.coff
+	../bin/coff2noff sjftest2-1.coff sjftest2-1
+
+#sjftest2-2.o: sjftest2-2.c
+#	$(CC) $(CFLAGS) -c sjftest2-2.c
+sjftest2-2: sjftest2-2.o start.o
+	$(LD) $(LDFLAGS) start.o sjftest2-2.o -o sjftest2-2.coff
+	../bin/coff2noff sjftest2-2.coff sjftest2-2
+
+#sjftest2-3.o: sjftest2-3.c
+#	$(CC) $(CFLAGS) -c sjftest2-3.c
+sjftest2-3: sjftest2-3.o start.o
+	$(LD) $(LDFLAGS) start.o sjftest2-3.o -o sjftest2-3.coff
+	../bin/coff2noff sjftest2-3.coff sjftest2-3
 

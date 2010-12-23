@@ -32,15 +32,12 @@
 //DONE
 //Compare function for SJF
 static int
-SJFCompare(Thread* a,Thread* b){ 
+threadCompare(Thread* a,Thread* b){ 
+    if(kernel->scheduler->getSchedulerType() == RR) return 0;
+
     if(a->getBurstTime() > b->getBurstTime()) return 1;
     else if(a->getBurstTime() < b->getBurstTime()) return -1;
     else return 0;
-}
-
-static int
-RRCompare(Thread* a,Thread* b){ 
-    return 0;
 }
 
 
@@ -48,8 +45,7 @@ Scheduler::Scheduler()
 {
 //	schedulerType = type;
 //DONE
-	if(schedulerType == RR)readyList = new SortedList<Thread *>(RRCompare);
-    else if(schedulerType == SJF)readyList = new SortedList<Thread *>(SJFCompare);
+	readyList = new SortedList<Thread *>(threadCompare);
 	toBeDestroyed = NULL;
 } 
 
@@ -98,7 +94,10 @@ Scheduler::FindNextToRun ()
 
     if (readyList->IsEmpty()) {
 	return NULL;
-    } else {        
+    } else {
+        DEBUG(dbgThread, "Now the threads are: ");
+        for(ListIterator<Thread*> it(readyList); !it.IsDone(); it.Next())
+            DEBUG(dbgThread, "  " << it.Item() <<" , Burst Time: "<< it.Item()->getBurstTime());
     	return readyList->RemoveFront();
     }
 }
@@ -148,8 +147,8 @@ Scheduler::Run (Thread *nextThread, bool finishing)
     kernel->currentThread = nextThread;  // switch to the next thread
     nextThread->setStatus(RUNNING);      // nextThread is now running
     kernel->currentThread->setStartTime(kernel->stats->userTicks);
-    cout <<"Current Burst Time:"<<kernel->currentThread->getBurstTime()<<endl;
-
+   // cout <<"Current Burst Time:"<<kernel->currentThread->getBurstTime()<<endl;
+    
 
     DEBUG(dbgThread, "Switching from: " << oldThread->getName() << " to: " << nextThread->getName());
     
@@ -166,6 +165,7 @@ Scheduler::Run (Thread *nextThread, bool finishing)
     ASSERT(kernel->interrupt->getLevel() == IntOff);
 
     DEBUG(dbgThread, "Now in thread: " << oldThread->getName());
+    DEBUG(dbgSleep, "Current Burst Time: "<<kernel->currentThread->getBurstTime());
 
     CheckToBeDestroyed();		// check if thread we were running
 					// before this one has finished

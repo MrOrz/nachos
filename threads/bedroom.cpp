@@ -23,10 +23,12 @@ void Bedroom::PutToBed(Thread* t, int x){
 bool Bedroom::MorningCall(){
   bool woken = false;
 
+
   ++_current_tick;
 
   if(_current_tick%10 == 0)
     DEBUG(dbgSleep, "-- current tick is " << _current_tick);
+
 
   // check who should wake up
   for(std::list<Bed>::iterator it = _beds.begin(); it != _beds.end(); ){
