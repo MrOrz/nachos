@@ -309,3 +309,40 @@ void AddrSpace::RestoreState()
     kernel->machine->pageTable = pageTable;
     kernel->machine->pageTableSize = numPages;
 }
+
+void AddrSpace::pageFaultHandle(int badVAddrReg){
+        // TODO: handle pagefault exception here!    
+    srand ( time(NULL) );
+    printf("Page falut ocurred.\n");
+    kernel->stats->numPageFaults++;
+    unsigned int i = 0;
+    int vpn = (unsigned) badVAddrReg / PageSize;
+    while(usedPhyPage[i] !=FALSE && i < NumPhysPages)
+        ++i;
+    if(i < NumPhysPages){
+        usedPhyPage[i] = true;
+        char *buffer = new char[PageSize];
+        usedPhyPage[i] = TRUE;
+        pageTable[vpn].valid = TRUE;
+        pageTable[vpn].physicalPage = i;
+        kernel->swapDisk->ReadSector(pageTable[vpn].virtualPage, buffer);
+        bcopy(buffer,&kernel->machine->mainMemory[i * PageSize],PageSize);
+    }
+    else{
+        char *buffer1 = new char[PageSize];
+        char *buffer2 = new char[PageSize];
+        int victim = rand() % NumPhysPages;
+
+        printf("Page %d swap out\n",victim);
+
+        bcopy(&kernel->machine->mainMemory[victim * PageSize], buffer1, PageSize);
+        kernel->swapDisk->ReadSector(pageTable[vpn].virtualPage, buffer2);
+
+        bcopy(buffer2, &kernel->machine->mainMemory[victim * PageSize], PageSize);
+        kernel->swapDisk->WriteSector(pageTable[vpn].virtualPage, buffer1);
+
+        pageTable[vpn].valid = TRUE;
+        pageTable[vpn].physicalPage = victim;
+        printf("Page replacement done\n");
+    }
+}
