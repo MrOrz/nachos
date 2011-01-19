@@ -23,6 +23,7 @@
 
 bool AddrSpace::usedPhyPage[NumPhysPages]={0};
 bool AddrSpace::usedVirPage[NumPhysPages]={0};
+bool AddrSpace::pageType[NumPhysPages]={0};
 TranslationEntry * AddrSpace::ptrPageTable[NumPhysPages]={NULL};
 //----------------------------------------------------------------------
 // SwapHeader
@@ -69,6 +70,7 @@ AddrSpace::AddrSpace()
     }*/
     // zero out the entire address space
 //    bzero(kernel->machine->mainMemory, MemorySize);
+    srand ( time(NULL) );
 }
 
 //----------------------------------------------------------------------
@@ -153,6 +155,7 @@ AddrSpace::Load(char *fileName)
             if(has_free_physical_page){
                 ptrPageTable[j] = &pageTable[i];
                 usedPhyPage[j]=TRUE;
+                pageType[j] = 1;
                 pageTable[i].physicalPage = j;
 	            pageTable[i].valid = TRUE;
                 pageTable[i].use = FALSE;
@@ -208,6 +211,53 @@ AddrSpace::Load(char *fileName)
                                             //virtualPageLocation=physicalPageLocation
         executable->ReadAt(&(kernel->machine->
         mainMemory[memoryLocation]),noffH.initData.size,noffH.initData.inFileAddr);
+      /*  bool has_free_physical_page = true; // flag
+        char *buf = new char[PageSize]; // a buffer to read code from disk
+        for (unsigned int i=0,j=0,k=0; i < numPages; i++) { // find available virtual page
+	        pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
+            
+            // find available physical page
+            if(has_free_physical_page){
+                // usedPhyPage has only NumPhysPages entries.
+                while(usedPhyPage[j]!=FALSE && j < NumPhysPages ) ++j; 
+                if(j >= NumPhysPages){ // no free physical page.
+                    has_free_physical_page = false;
+                }
+            }
+            
+            // if physical page j < NumPhysPages is found
+            if(has_free_physical_page){
+                ptrPageTable[j] = &pageTable[i];
+                usedPhyPage[j]=TRUE;
+                pageTable[i].physicalPage = j;
+	            pageTable[i].valid = TRUE;
+                pageTable[i].use = FALSE;
+                pageTable[i].dirty = FALSE;
+                pageTable[i].readOnly = FALSE;  
+                
+                // read this page of code into main memory
+                executable->ReadAt( &(kernel->machine->mainMemory[PageSize*j] ), PageSize, noffH.data.inFileAddr + (PageSize*i) );
+	        }	    
+	        else    // already ran out of physical pages
+	        {
+	            // find available virtual page
+	            while(usedVirPage[k]!=FALSE) ++k;
+	            usedVirPage[k]=TRUE;
+	            pageTable[i].virtualPage = k;   // virtual page id
+	            pageTable[i].valid = FALSE;     // not in physical memory now!
+	            pageTable[i].use = FALSE;
+                pageTable[i].dirty = FALSE;
+                pageTable[i].readOnly = FALSE;  
+                
+                // read this page of code into a buffer, then write to swap space
+                executable->ReadAt(buf, PageSize, noffH.data.inFileAddr + (PageSize * i));
+                kernel->swapDisk->WriteSector(k, buf);
+	        }
+
+	        
+        }
+        delete[] buf; // buf is useless now, delete it.*/
+
 
 /*        executable->ReadAt(
 		&(kernel->machine->mainMemory[noffH.initData.virtualAddr]),
@@ -313,7 +363,7 @@ void AddrSpace::RestoreState()
 
 void AddrSpace::pageFaultHandle(int badVAddrReg){
         // TODO: handle pagefault exception here!    
-    srand ( time(NULL) );
+    ;
     printf("Page falut ocurred.\n");
     kernel->stats->numPageFaults++;
     unsigned int i = 0;
@@ -332,7 +382,11 @@ void AddrSpace::pageFaultHandle(int badVAddrReg){
     else{
         char *buffer1 = new char[PageSize];
         char *buffer2 = new char[PageSize];
-        int victim = rand() % NumPhysPages;
+        int victim;
+        while(1){
+            victim =  rand() % NumPhysPages;
+            if(pageType[victim]==1)break;
+        } 
 
         printf("Page %d swapping out\n",victim);
 
