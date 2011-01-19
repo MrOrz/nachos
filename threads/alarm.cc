@@ -54,8 +54,8 @@ Alarm::CallBack()
     bool woken =  _bedroom.MorningCall(); // advance the time inside the bedroom
                                           // returns true when any thread woken
 
-    if (status == IdleMode && _bedroom.IsEmpty() ) {// is it time to quit?
-        if (!interrupt->AnyFutureInterrupts()  && !woken) {
+    if (status == IdleMode && !woken && _bedroom.IsEmpty() ) {// is it time to quit?
+        if (!interrupt->AnyFutureInterrupts()) {
 	        timer->Disable();	// turn off the timer
 	      }
     } else {			// there's someone to preempt
