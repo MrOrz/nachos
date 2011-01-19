@@ -47,6 +47,7 @@
 //	"which" is the kind of exception.  The list of possible exceptions
 //	are in machine.h.
 //----------------------------------------------------------------------
+void pageFaultHandle(int);
 
 void
 ExceptionHandler(ExceptionType which)
@@ -134,7 +135,8 @@ void pageFaultHandle(int badVAddrReg){
         kernel->swapDisk->WriteSector(addrSpace->pageTable[vpn].virtualPage, buf1);
 
         addrSpace->pageTable[vpn].valid = TRUE;
-        addrSpace->pageTable[vpn].valid = TRUE;
+        addrSpace->pageTable[vpn].physicalPage = victim;
+        printf("Page replacement done\n");
     }
 
 
