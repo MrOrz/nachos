@@ -118,27 +118,14 @@ AddrSpace::Load(char *fileName)
 //	cout << "number of pages of " << fileName<< " is "<<numPages<<endl;
 
     pageTable = new TranslationEntry[numPages];
-    for (unsigned int i = 0,j=0; i < numPages; i++) {
-	    pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
-	
-        while(usedPhyPage[j]!=FALSE) ++j;
-        usedPhyPage[j]=TRUE;
-        pageTable[i].physicalPage = j;
-    //	pageTable[i].physicalPage = 0;
-	    pageTable[i].valid = TRUE;
-    //	pageTable[i].valid = FALSE;
-	    pageTable[i].use = FALSE;
-	    pageTable[i].dirty = FALSE;
-	    pageTable[i].readOnly = FALSE;  
-    }
-
-
+    
     size = numPages * PageSize;
 
-    ASSERT(numPages <= NumPhysPages);		// check we're not trying
+//    ASSERT(numPages <= NumPhysPages);		// check we're not trying
 						// to run anything too big --
 						// at least until we have
 						// virtual memory
+// DONE: Now we have virtual memory :P
 
     DEBUG(dbgAddr, "Initializing address space: " << numPages << ", " << size);
 
@@ -146,7 +133,57 @@ AddrSpace::Load(char *fileName)
 	if (noffH.code.size > 0) {
 //        DEBUG(dbgAddr, "Initializing code segment.");
 //	DEBUG(dbgAddr, noffH.code.virtualAddr << ", " << noffH.code.size);
-        int virtualPageN = noffH.code.virtualAddr/PageSize;     
+
+        bool has_free_physical_page = true; // flag
+        unsigned char *buf = new char[PageSize]; // a buffer to read code from disk
+        for (unsigned int i=0,j=0,k=0; i < numPages; i++) { // find available virtual page
+	        pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
+            
+            // find available physical page
+            if(has_free_physical_page){
+                // usedPhyPage has only NumPhysPages entries.
+                while(usedPhyPage[j]!=FALSE && j < NumPhysPages ) ++j; 
+                if(j >= NumPhysPages){ // no free physical page.
+                    has_free_physical_page = false;
+                }
+            }
+            
+            // if physical page j < NumPhysPages is found
+            if(has_free_physical_page){
+                usedPhyPage[j]=TRUE;
+                pageTable[i].physicalPage = j;
+	            pageTable[i].valid = TRUE;
+                pageTable[i].use = FALSE;
+                pageTable[i].dirty = FALSE;
+                pageTable[i].readOnly = FALSE;  
+                
+                // read this page of code into main memory
+                executable->ReadAt( &(kernel->machine->mainMemory[PageSize*j] ), PageSize, noffH.code.inFileAddr + (PageSize*i) );
+	        }	    
+	        else    // already ran out of physical pages
+	        {
+	            // find available virtual page
+	            while(usedVirPage[k]!=FALSE) ++k;
+	            pageTable[i].virtualPage = k;   // virtual page id
+	            pageTable[i].valid = FALSE;     // not in physical memory now!
+	            pageTable[i].use = FALSE;
+                pageTable[i].dirty = FALSE;
+                pageTable[i].readOnly = FALSE;  
+                
+                // read this page of code into a buffer, then write to swap space
+                executable->ReadAt(buf, PageSize, noffH.code.inFileAddr + (PageSize * i));
+                kernel->swapDisk->WriteSector(k, buf);
+	        }
+
+	        
+        }
+        delete[] buf; // buf is useless now, delete it.
+        
+    // ------ following are codes in HW1.  (MrOrz)
+    // since now we have to load code into memory page-by-page 
+    // We commented these old code out.
+
+/*        int virtualPageN = noffH.code.virtualAddr/PageSize;     
         int virtualPageLocation = noffH.code.virtualAddr% PageSize;
         int physicalPageN = pageTable[virtualPageN].physicalPage;
         int memoryLocation = physicalPageN * PageSize + virtualPageLocation;
