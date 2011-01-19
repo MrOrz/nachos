@@ -23,7 +23,7 @@
 
 bool AddrSpace::usedPhyPage[NumPhysPages]={0};
 bool AddrSpace::usedVirPage[NumPhysPages]={0};
-
+TranslationEntry * AddrSpace::ptrPageTable[NumPhysPages]={NULL};
 //----------------------------------------------------------------------
 // SwapHeader
 // 	Do little endian to big endian conversion on the bytes in the 
@@ -151,6 +151,7 @@ AddrSpace::Load(char *fileName)
             
             // if physical page j < NumPhysPages is found
             if(has_free_physical_page){
+                ptrPageTable[j] = &pageTable[i];
                 usedPhyPage[j]=TRUE;
                 pageTable[i].physicalPage = j;
 	            pageTable[i].valid = TRUE;
@@ -324,6 +325,7 @@ void AddrSpace::pageFaultHandle(int badVAddrReg){
         usedPhyPage[i] = TRUE;
         pageTable[vpn].valid = TRUE;
         pageTable[vpn].physicalPage = i;
+        ptrPageTable[i] = &pageTable[vpn];
         kernel->swapDisk->ReadSector(pageTable[vpn].virtualPage, buffer);
         bcopy(buffer,&kernel->machine->mainMemory[i * PageSize],PageSize);
     }
@@ -339,6 +341,10 @@ void AddrSpace::pageFaultHandle(int badVAddrReg){
 
         bcopy(buffer2, &kernel->machine->mainMemory[victim * PageSize], PageSize);
         kernel->swapDisk->WriteSector(pageTable[vpn].virtualPage, buffer1);
+
+        ptrPageTable[victim]->virtualPage = pageTable[vpn].virtualPage;
+        ptrPageTable[victim]->valid = FALSE;
+        ptrPageTable[victim] = &pageTable[vpn];
 
         pageTable[vpn].valid = TRUE;
         pageTable[vpn].physicalPage = victim;

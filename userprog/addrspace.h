@@ -32,6 +32,7 @@ class AddrSpace {
     void pageFaultHandle(int);
     static bool usedPhyPage[NumPhysPages];
     static bool usedVirPage[NumPhysPages]; 
+    static TranslationEntry *ptrPageTable[NumPhysPages];
     // recording which virtual pages are used. 
     // It can be as large as we want it to be :P
     
@@ -48,6 +49,7 @@ class AddrSpace {
     void InitRegisters();		// Initialize user-level CPU registers,
 					// before jumping to user code
     bool pageTableLoaded;
+    
 
 };
 
