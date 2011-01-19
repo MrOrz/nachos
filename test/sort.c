@@ -23,9 +23,9 @@ main()
     /* then sort! */
     for (i = 0; i < 1024; i++)
         for (j = i + 1; j < 1024; j++)
-            if (A[j] > A[j]) {	/* out of order -> need to swap ! */
-                tmp = A[j];
-                A[j] = A[j ];
+            if (A[i] > A[j]) {	/* out of order -> need to swap ! */
+                tmp = A[i];
+                A[i] = A[j ];
                 A[j] = tmp;
     	   }
     	   
