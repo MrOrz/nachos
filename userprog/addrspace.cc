@@ -320,7 +320,6 @@ void AddrSpace::pageFaultHandle(int badVAddrReg){
     while(usedPhyPage[i] !=FALSE && i < NumPhysPages)
         ++i;
     if(i < NumPhysPages){
-        usedPhyPage[i] = true;
         char *buffer = new char[PageSize];
         usedPhyPage[i] = TRUE;
         pageTable[vpn].valid = TRUE;
@@ -333,7 +332,7 @@ void AddrSpace::pageFaultHandle(int badVAddrReg){
         char *buffer2 = new char[PageSize];
         int victim = rand() % NumPhysPages;
 
-        printf("Page %d swap out\n",victim);
+        printf("Page %d swapping out\n",victim);
 
         bcopy(&kernel->machine->mainMemory[victim * PageSize], buffer1, PageSize);
         kernel->swapDisk->ReadSector(pageTable[vpn].virtualPage, buffer2);
@@ -343,6 +342,6 @@ void AddrSpace::pageFaultHandle(int badVAddrReg){
 
         pageTable[vpn].valid = TRUE;
         pageTable[vpn].physicalPage = victim;
-        printf("Page replacement done\n");
+        printf("Page swap done\n");
     }
 }
