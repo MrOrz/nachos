@@ -1,7 +1,10 @@
 Total threads number is 1
 Thread test/sleep2 is executing.
 Print integer:1
-** Thread 0x9b226c0 will wake up at interrupt 300.
+Thread 0x83d86c0 go to sleep
+Actual Work Time:18
+Next Burst Time:59
+** Thread 0x83d86c0 will wake up at interrupt 300.
 -- current interrupt is 10
 -- current interrupt is 20
 -- current interrupt is 30
@@ -32,9 +35,12 @@ Print integer:1
 -- current interrupt is 280
 -- current interrupt is 290
 -- current interrupt is 300
-** 0x9b226c0 is waking up...
-Current Burst Time: 100
-** Thread 0x9b226c0 will wake up at interrupt 800.
+** 0x83d86c0 is waking up...
+Current Burst Time: 59
+Thread 0x83d86c0 go to sleep
+Actual Work Time:6
+Next Burst Time:32
+** Thread 0x83d86c0 will wake up at interrupt 800.
 -- current interrupt is 310
 -- current interrupt is 320
 -- current interrupt is 330
@@ -85,9 +91,12 @@ Current Burst Time: 100
 -- current interrupt is 780
 -- current interrupt is 790
 -- current interrupt is 800
-** 0x9b226c0 is waking up...
-Current Burst Time: 100
-** Thread 0x9b226c0 will wake up at interrupt 1000.
+** 0x83d86c0 is waking up...
+Current Burst Time: 32
+Thread 0x83d86c0 go to sleep
+Actual Work Time:6
+Next Burst Time:19
+** Thread 0x83d86c0 will wake up at interrupt 1000.
 -- current interrupt is 810
 -- current interrupt is 820
 -- current interrupt is 830
@@ -108,9 +117,12 @@ Current Burst Time: 100
 -- current interrupt is 980
 -- current interrupt is 990
 -- current interrupt is 1000
-** 0x9b226c0 is waking up...
-Current Burst Time: 100
-** Thread 0x9b226c0 will wake up at interrupt 1400.
+** 0x83d86c0 is waking up...
+Current Burst Time: 19
+Thread 0x83d86c0 go to sleep
+Actual Work Time:6
+Next Burst Time:12
+** Thread 0x83d86c0 will wake up at interrupt 1400.
 -- current interrupt is 1010
 -- current interrupt is 1020
 -- current interrupt is 1030
@@ -151,15 +163,15 @@ Current Burst Time: 100
 -- current interrupt is 1380
 -- current interrupt is 1390
 -- current interrupt is 1400
-** 0x9b226c0 is waking up...
-Current Burst Time: 100
+** 0x83d86c0 is waking up...
+Current Burst Time: 12
 Print integer:0
 return value:0
 No threads ready or runnable, and no pending interrupts.
 Assuming the program completed.
 Machine halting!
 
-Ticks: total 140100, idle 139937, system 110, user 53
+Ticks: total 140100, idle 139977, system 70, user 53
 Disk I/O: reads 0, writes 0
 Console I/O: reads 0, writes 0
 Paging: faults 0

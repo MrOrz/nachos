@@ -4,29 +4,29 @@ Thread test/sjftest1-2 is executing.
 Thread test/sjftest1-3 is executing.
 Print integer:0
 Print integer:1
-Print integer:100
-Print integer:101
-Print integer:102
-Print integer:103
-Print integer:104
-Print integer:200
-Print integer:201
-Print integer:202
-Print integer:203
-Print integer:204
 Print integer:2
 Print integer:3
 Print integer:4
 Print integer:5
 Print integer:6
 Print integer:7
-return value:0
-Print integer:205
-Print integer:206
-Print integer:207
 Print integer:8
 Print integer:9
 return value:0
+Print integer:100
+Print integer:101
+Print integer:102
+Print integer:103
+Print integer:104
+return value:0
+Print integer:200
+Print integer:201
+Print integer:202
+Print integer:203
+Print integer:204
+Print integer:205
+Print integer:206
+Print integer:207
 Print integer:208
 Print integer:209
 Print integer:210
@@ -39,7 +39,7 @@ No threads ready or runnable, and no pending interrupts.
 Assuming the program completed.
 Machine halting!
 
-Ticks: total 800, idle 73, system 140, user 587
+Ticks: total 700, idle 43, system 70, user 587
 Disk I/O: reads 0, writes 0
 Console I/O: reads 0, writes 0
 Paging: faults 0
