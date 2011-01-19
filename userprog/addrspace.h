@@ -29,6 +29,7 @@ class AddrSpace {
 
     void SaveState();			// Save/restore address space-specific
     void RestoreState();		// info on a context switch 
+    void pageFaultHandle(int);
     static bool usedPhyPage[NumPhysPages];
     static bool usedVirPage[NumPhysPages]; 
     // recording which virtual pages are used. 
