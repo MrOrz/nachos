@@ -80,8 +80,12 @@ AddrSpace::AddrSpace()
 
 AddrSpace::~AddrSpace()
 {
-    for(size_t i = 0; i < numPages; i++)
-        usedPhyPage[pageTable[i].physicalPage]=FALSE;
+    for(size_t i = 0; i < numPages; i++){
+        if(pageTable[i].valid)
+            usedPhyPage[pageTable[i].physicalPage] = FALSE;
+        else
+            usedVirPage[pageTable[i].virtualPage] = FALSE;
+    }
     delete pageTable;
 }
 
