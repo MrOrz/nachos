@@ -78,7 +78,7 @@ AddrSpace::AddrSpace()
 
 AddrSpace::~AddrSpace()
 {
-    for(int i = 0; i < numPages; i++)
+    for(size_t i = 0; i < numPages; i++)
         usedPhyPage[pageTable[i].physicalPage]=FALSE;
     delete pageTable;
 }
@@ -136,7 +136,7 @@ AddrSpace::Load(char *fileName)
 //	DEBUG(dbgAddr, noffH.code.virtualAddr << ", " << noffH.code.size);
 
         bool has_free_physical_page = true; // flag
-        unsigned char *buf = new char[PageSize]; // a buffer to read code from disk
+        char *buf = new char[PageSize]; // a buffer to read code from disk
         for (unsigned int i=0,j=0,k=0; i < numPages; i++) { // find available virtual page
 	        pageTable[i].virtualPage = i;	// for now, virt page # = phys page #
             
@@ -191,7 +191,8 @@ AddrSpace::Load(char *fileName)
         int memoryLocation = physicalPageN * PageSize + virtualPageLocation;
                                             //virtualPageLocation=physicalPageLocation
         executable->ReadAt(&(kernel->machine->
-        mainMemory[memoryLocation]),noffH.code.size,noffH.code.inFileAddr);
+        mainMemory[memoryLocation]),noffH.code.size,noffH.code.inFileAddr); 
+*/
 /*        	executable->ReadAt(
 		&(kernel->machine->mainMemory[noffH.code.virtualAddr]), 
 			noffH.code.size, noffH.code.inFileAddr);*/

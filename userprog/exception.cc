@@ -90,7 +90,9 @@ ExceptionHandler(ExceptionType which)
     }
 	  break;
 	case PageFaultException:
+  	    kernel->machine->ReadRegister(BadVAddrReg);
         // TODO: handle pagefault exception here!
+        
 	default:
 	    cerr << "Unexpected user mode exception" << which << "\n";
 	    break;
