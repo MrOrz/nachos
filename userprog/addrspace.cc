@@ -22,6 +22,7 @@
 #include "noff.h"
 
 bool AddrSpace::usedPhyPage[NumPhysPages]={0};
+bool AddrSpace::usedVirPage[NumPhysPages]={0};
 
 //----------------------------------------------------------------------
 // SwapHeader
@@ -164,6 +165,7 @@ AddrSpace::Load(char *fileName)
 	        {
 	            // find available virtual page
 	            while(usedVirPage[k]!=FALSE) ++k;
+	            usedVirPage[k]=TRUE;
 	            pageTable[i].virtualPage = k;   // virtual page id
 	            pageTable[i].valid = FALSE;     // not in physical memory now!
 	            pageTable[i].use = FALSE;
