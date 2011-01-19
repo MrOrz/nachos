@@ -93,7 +93,7 @@ ExceptionHandler(ExceptionType which)
 	case PageFaultException:
   	    val = kernel->machine->ReadRegister(BadVAddrReg);
         kernel->currentThread->space->pageFaultHandle(val);
-
+        return;
         
 	default:
 	    cerr << "Unexpected user mode exception" << which << "\n";
