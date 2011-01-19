@@ -90,13 +90,53 @@ ExceptionHandler(ExceptionType which)
     }
 	  break;
 	case PageFaultException:
-  	    kernel->machine->ReadRegister(BadVAddrReg);
-        // TODO: handle pagefault exception here!
+  	    val = kernel->machine->ReadRegister(BadVAddrReg);
+        pageFaultHandle(val);
+
         
 	default:
 	    cerr << "Unexpected user mode exception" << which << "\n";
 	    break;
   }
   ASSERTNOTREACHED();
+}
+
+void pageFaultHandle(int badVAddrReg){
+        // TODO: handle pagefault exception here!    
+    srand ( time(NULL) );
+    printf("Page falut ocurred.\n");
+    kernel->stats->numPageFaults++;
+    int i = 0;
+    vpn = (unsigned) badVAddrReg / PageSize;
+    AddrSpace * addrSpace = kernel->currentThread->space;
+    while(addrSpace->usedPhyPage[i] !=FALSE && i < NumPhysPages)
+        ++i;
+    if(i < NumPhysPages){
+        usedPhyPage[i] = true;
+        char *buffer = new char[PageSize];
+        kernel->currentThread->space->usedPhyPage[i] = TRUE;
+        addrSpace->pageTable[vpn].valid = TRUE;
+        addrSpace->pageTable[vpn].physicalPage = i;
+        kernel->swapDisk->ReadSector(addrSpace->pageTable[vpn].virtualPage, buf);
+        bcopy(buf,&kernel->machine->mainMemory[i * PageSize],PageSize);
+    }
+    else{
+        char *buf1 = new char[PageSize];
+        char *buf2 = new char[PageSize];
+        int victim = rand() % NumPhysPages;
+
+        printf("Page %d swap out\n",victim);
+
+        bcopy(&kernel->machine->mainMemory[victim * PageSize], buf1, PageSize);
+        kernel->swapDisk->ReadSector(addrSpace->pageTable[vpn].virtualPage, buf2);
+
+        bcopy(buf2, &kernel->machine->mainMemory[victim * PageSize], PageSize);
+        kernel->swapDisk->WriteSector(addrSpace->pageTable[vpn].virtualPage, buf1);
+
+        addrSpace->pageTable[vpn].valid = TRUE;
+        addrSpace->pageTable[vpn].valid = TRUE;
+    }
+
+
 }
 
