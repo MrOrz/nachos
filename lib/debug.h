@@ -29,6 +29,7 @@ const char dbgFile = 'f'; 		// file system (FILESYS)
 const char dbgAddr = 'a'; 		// address spaces (USER_PROGRAM)
 const char dbgNet = 'n'; 		// network emulation (NETWORK)
 const char dbgSleep = 'z'; 		// Sleep emulation (proj2) zzzZZZZ  DONE.
+const char dbgPageFault = 'p';
 
 class Debug {
   public:

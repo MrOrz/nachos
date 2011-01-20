@@ -368,7 +368,8 @@ void AddrSpace::RestoreState()
 void AddrSpace::pageFaultHandle(int badVAddrReg){
         // TODO: handle pagefault exception here!    
     ;
-    printf("Page falut ocurred.\n");
+    
+    DEBUG(dbgPageFault, "Page fault ocurred.");        
     kernel->stats->numPageFaults++;
     unsigned int i = 0;
     int vpn = (unsigned) badVAddrReg / PageSize;
@@ -391,8 +392,7 @@ void AddrSpace::pageFaultHandle(int badVAddrReg){
             victim =  rand() % NumPhysPages;
             if(pageType[victim]==1)break;
         } 
-
-        printf("Page %d swapping out\n",victim);
+        DEBUG(dbgPageFault, "Page "<<victim<<" swapping out.");        
 
         bcopy(&kernel->machine->mainMemory[victim * PageSize], buffer1, PageSize);
         kernel->swapDisk->ReadSector(pageTable[vpn].virtualPage, buffer2);
@@ -406,6 +406,6 @@ void AddrSpace::pageFaultHandle(int badVAddrReg){
 
         pageTable[vpn].valid = TRUE;
         pageTable[vpn].physicalPage = victim;
-        printf("Page swap done\n");
+        DEBUG(dbgPageFault, "Page swap done.");        
     }
 }
